@@ -30,7 +30,6 @@ img{height:auto}
 .owl-spot--learn{width:min(320px,48vw);margin-left:auto;filter:none}
 .owl-spot--school{width:min(430px,68vw);margin:0 auto;filter:none}
 .owl-spot--gallery{position:absolute;left:50%;top:0;z-index:0;width:min(620px,54vw);margin:0;opacity:.18;filter:none;pointer-events:none;transform:translateX(-50%)}
-.owl-spot--route{position:absolute;left:30px;bottom:calc(100% - 16px);z-index:2;width:min(310px,28vw);margin:0;filter:none;pointer-events:none}
 
 /* Motion system */
 .motion-ready .reveal{
@@ -44,16 +43,13 @@ img{height:auto}
 .motion-ready .reveal-up{transform:translate3d(0,42px,0)}
 .motion-ready .reveal-scale{transform:scale(.94) translate3d(0,24px,0);filter:blur(3px)}
 .motion-ready .owl-spot--gallery.reveal-scale{transform:translateX(-50%) scale(.94) translate3d(0,24px,0)}
-.motion-ready .owl-spot--route.reveal-scale{transform:scale(.94) translate3d(0,24px,0)}
 .motion-ready .reveal-fade{transform:translate3d(0,18px,0)}
 .motion-ready .reveal.is-visible{opacity:1;transform:none;filter:none}
 .motion-ready .owl-spot--gallery.reveal.is-visible{transform:translateX(-50%)}
-.motion-ready .owl-spot--route.reveal.is-visible{transform:none}
 .motion-ready .owl-spot.reveal.is-visible{filter:drop-shadow(0 18px 28px rgba(8,72,63,.16))}
 .motion-ready .owl-spot--learn.reveal.is-visible{filter:none}
 .motion-ready .owl-spot--school.reveal.is-visible{filter:none}
 .motion-ready .owl-spot--gallery.reveal.is-visible{filter:none}
-.motion-ready .owl-spot--route.reveal.is-visible{filter:none}
 .hero__content>*{
   animation:hero-enter .9s cubic-bezier(.2,.75,.2,1) both;
 }
@@ -492,7 +488,7 @@ blockquote{
 }
 .contact{background:radial-gradient(circle at 88% 15%,rgba(16,201,170,.11),transparent 26%),#fcfdfc}
 .contact{
-  padding:clamp(250px,34vw,380px) 0 34px;
+  padding:clamp(88px,9vw,130px) 0 34px;
   background:radial-gradient(circle at 9% 50%,rgba(16,201,170,.13),transparent 24%),linear-gradient(90deg,#fcfdfc,#eef8f4);
 }
 .contact__compact{
@@ -809,6 +805,20 @@ input:focus,textarea:focus{
 .video-showcase__previews{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:22px}
 .video-showcase__previews iframe{min-height:300px;border-radius:22px;box-shadow:0 18px 45px rgba(0,20,18,.2)}
 .learn-more{background:radial-gradient(circle at 92% 12%,rgba(16,201,170,.12),transparent 24%),#fcfdfc}
+.learn-more .section-head{
+  min-height:clamp(260px,36vw,470px);
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  margin-bottom:42px;
+  background:url("../images/owl/owl1.JPG") center/contain no-repeat;
+}
+.learn-more .section-head>div{position:relative;z-index:1}
+.learn-more .section-head h2{
+  margin:0;
+  padding-top:clamp(84px,12vw,150px);
+}
+.learn-more .owl-spot--learn{display:none}
 .learn-more__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .learn-card{min-height:360px;padding:0 0 30px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;border:1px solid rgba(255,255,255,.9);border-radius:24px;background:linear-gradient(145deg,rgba(189,238,225,.76),rgba(255,255,255,.42));box-shadow:0 18px 45px rgba(26,86,77,.09),inset 0 1px 0 #fff;transition:transform .2s,box-shadow .2s}
 .learn-card img{width:100%;height:240px;object-fit:cover;margin-bottom:auto}
@@ -892,9 +902,6 @@ input:focus,textarea:focus{
   .photo-gallery .section-head{min-height:290px}
   .owl-spot--gallery{left:50%;top:0;width:min(360px,88vw);margin:0;opacity:.14;transform:translateX(-50%)}
   .owl-spot--school{width:min(320px,82vw);margin:0 auto 28px}
-  .owl-spot--route{left:50%;bottom:calc(100% - 10px);width:min(210px,62vw);margin:0;transform:translateX(-50%)}
-  .motion-ready .owl-spot--route.reveal-scale{transform:translateX(-50%) scale(.94) translate3d(0,24px,0)}
-  .motion-ready .owl-spot--route.reveal.is-visible{transform:translateX(-50%)}
   .video-showcase__layout{grid-template-columns:1fr}
   .video-showcase__playlist{height:380px}
   .video-showcase__previews{grid-template-columns:1fr}
@@ -1140,20 +1147,7 @@ input:focus,textarea:focus{
 }
 @media(max-width:700px){
   .contact{
-    padding:clamp(190px,59vw,250px) 0 36px;
-  }
-  .owl-spot--route{
-    left:50%;
-    bottom:calc(100% - 10px);
-    width:min(210px,62vw);
-    margin:0;
-    transform:translateX(-50%);
-  }
-  .motion-ready .owl-spot--route.reveal-scale{
-    transform:translateX(-50%) scale(.94) translate3d(0,24px,0);
-  }
-  .motion-ready .owl-spot--route.reveal.is-visible{
-    transform:translateX(-50%);
+    padding:82px 0 36px;
   }
   .contact__compact h2{
     font-size:38px;
