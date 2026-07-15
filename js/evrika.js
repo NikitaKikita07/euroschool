@@ -2,6 +2,8 @@ const header = document.querySelector('.header');
 const menuButton = document.querySelector('.menu-button');
 const nav = document.querySelector('.nav');
 const langButton = document.querySelector('.lang-switch');
+const navDropdown = document.querySelector('.nav__dropdown');
+const navDropdownToggle = document.querySelector('.nav__dropdown-toggle');
 const titleByLanguage = {
   uk: 'Дитячий сад Еврика | Європейська гімназія Дніпро',
   ru: 'Детский сад Эврика | Европейская гимназия Днепр'
@@ -71,7 +73,21 @@ nav?.addEventListener('click', (event) => {
   if (event.target.closest('a')) {
     menuButton?.setAttribute('aria-expanded', 'false');
     header?.classList.remove('open');
+    navDropdown?.classList.remove('open');
+    navDropdownToggle?.setAttribute('aria-expanded', 'false');
   }
+});
+
+navDropdownToggle?.addEventListener('click', event => {
+  event.stopPropagation();
+  const open = navDropdown.classList.toggle('open');
+  navDropdownToggle.setAttribute('aria-expanded', String(open));
+});
+
+document.addEventListener('click', event => {
+  if (!navDropdown || navDropdown.contains(event.target)) return;
+  navDropdown.classList.remove('open');
+  navDropdownToggle?.setAttribute('aria-expanded', 'false');
 });
 
 applyLanguage(localStorage.getItem('site-language') === 'ru' ? 'ru' : 'uk');

@@ -9,6 +9,8 @@ body.evrika-page{background:#fcfdfc}
 .evrika-hero h1{max-width:920px;margin:22px 0;font-size:clamp(54px,7.4vw,104px);line-height:.96;letter-spacing:-.055em}
 .evrika-hero p{max-width:650px;font-size:19px;color:rgba(255,255,255,.84)}
 .evrika-hero__actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:35px}
+.evrika-owls{padding:34px 0 24px;background:#fff;text-align:center}
+.evrika-owls img{display:block;width:min(640px,86vw);height:auto;margin:0 auto}
 .wonder{position:relative;overflow:hidden;background:#0f5f56;color:#fff}
 .wonder::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,42,37,.84),rgba(4,42,37,.58)),url("../images/school-students.png") center/cover no-repeat;opacity:.95}
 .wonder__inner{position:relative;z-index:1;max-width:860px}

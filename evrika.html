@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="uk">
 <head>
   <meta charset="utf-8">
@@ -28,11 +28,17 @@
         <span></span><span></span><span></span><span class="sr-only" data-ru>Открыть меню</span><span class="sr-only" data-uk>Відкрити меню</span>
       </button>
       <nav class="nav" id="main-nav" aria-label="Основная навигация">
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-toggle" type="button" aria-expanded="false" aria-controls="about-dropdown"><span data-ru>О школе</span><span data-uk>Про школу</span></button>
+          <div class="nav__dropdown-menu" id="about-dropdown">
+            <a href="index.html#about" data-ru>Европейская гимназия</a><a href="index.html#about" data-uk>Європейська гімназія</a>
+            <a href="evrika.html" data-ru>Детский сад Эврика</a><a href="evrika.html" data-uk>Дитячий сад Еврика</a>
+            <a href="teachers.html" data-ru>Наши учителя</a><a href="teachers.html" data-uk>Наші вчителі</a>
+          </div>
+        </div>
         <a href="index.html" data-ru>Школа</a><a href="index.html" data-uk>Школа</a>
         <a href="#children" data-ru>Наши дети</a><a href="#children" data-uk>Наші діти</a>
         <a href="#videos" data-ru>Спектакли</a><a href="#videos" data-uk>Вистави</a>
-        <a href="#faq" data-ru>Вопросы</a><a href="#faq" data-uk>Питання</a>
-        <a href="#route">Маршрут</a>
         <a href="#contacts" data-ru>Контакты</a><a href="#contacts" data-uk>Контакти</a>
       </nav>
       <a class="header__phone" href="tel:+380671757773" aria-label="Позвонить: +38 067 175 77 73">
@@ -44,7 +50,7 @@
 
   <main id="main">
     <section class="evrika-hero">
-      <img class="evrika-hero__image" src="images/evrika/5owls.png" alt="">
+      <img class="evrika-hero__image" src="images/evrika/evrikaHero.JPG" alt="">
       <div class="evrika-hero__shade"></div>
       <div class="container evrika-hero__content">
         <div class="eyebrow eyebrow--light" data-ru>Детский сад при Европейской гимназии</div>
@@ -59,6 +65,12 @@
           <a class="button button--ghost" href="#children" data-ru>Посмотреть жизнь сада</a>
           <a class="button button--ghost" href="#children" data-uk>Подивитися життя саду</a>
         </div>
+      </div>
+    </section>
+
+    <section class="evrika-owls" aria-label="Совы Еврики">
+      <div class="container">
+        <img src="images/evrika/5owls.png" alt="" loading="lazy" decoding="async">
       </div>
     </section>
 
@@ -261,6 +273,7 @@
       <div class="container footer__meta">© <span id="year"></span> <span data-ru>Европейская гимназия</span><span data-uk>Європейська гімназія</span></div>
       <nav class="container footer__nav" aria-label="Навигация в подвале">
         <a href="index.html" data-ru>Школа</a><a href="index.html" data-uk>Школа</a>
+        <a href="teachers.html" data-ru>Наши учителя</a><a href="teachers.html" data-uk>Наші вчителі</a>
         <a href="#children" data-ru>Наши дети</a><a href="#children" data-uk>Наші діти</a>
         <a href="#videos" data-ru>Спектакли</a><a href="#videos" data-uk>Вистави</a>
         <a href="#faq" data-ru>Вопросы</a><a href="#faq" data-uk>Питання</a>
