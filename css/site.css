@@ -685,9 +685,14 @@ input:focus,textarea:focus{
   .nav{
     left:8px;right:8px;top:84px;
     border:1px solid rgba(255,255,255,.9);
+    background:rgba(255,255,255,.8);
     box-shadow:0 20px 40px rgba(0,40,35,.15);
     -webkit-backdrop-filter:blur(22px);
     backdrop-filter:blur(22px);
+  }
+  .header.open .nav,
+  .header.scrolled.open .nav{
+    background:rgba(255,255,255,.8);
   }
   .hero__socials{position:static;margin-top:24px}
 }
