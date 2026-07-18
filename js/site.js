@@ -254,6 +254,65 @@ photoTracks.forEach(track => {
 
 });
 
+document.querySelectorAll('.graduates-carousel').forEach(carousel => {
+  const track = carousel.querySelector('.graduates-carousel__track');
+  const prev = carousel.closest('.graduates')?.querySelector('.graduates-carousel__arrow--prev');
+  const next = carousel.closest('.graduates')?.querySelector('.graduates-carousel__arrow--next');
+  if (!track || !prev || !next) return;
+
+  let dragging = false;
+  let startX = 0;
+  let startScroll = 0;
+  let moved = false;
+
+  const slideStep = () => {
+    const slide = track.querySelector('.graduates-post');
+    if (!slide) return track.clientWidth * 0.85;
+    const gap = Number.parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+    return slide.getBoundingClientRect().width + gap;
+  };
+
+  const moveGraduatesCarousel = direction => {
+    track.scrollBy({ left: direction * slideStep(), behavior: 'smooth' });
+  };
+
+  prev.addEventListener('click', () => moveGraduatesCarousel(-1));
+  next.addEventListener('click', () => moveGraduatesCarousel(1));
+
+  track.addEventListener('pointerdown', event => {
+    if (event.pointerType === 'touch') return;
+    dragging = true;
+    moved = false;
+    startX = event.clientX;
+    startScroll = track.scrollLeft;
+    track.classList.add('is-dragging');
+    track.setPointerCapture(event.pointerId);
+  });
+
+  track.addEventListener('pointermove', event => {
+    if (!dragging) return;
+    const distance = event.clientX - startX;
+    if (Math.abs(distance) > 6) moved = true;
+    track.scrollLeft = startScroll - distance;
+  });
+
+  const stopGraduatesDrag = event => {
+    if (!dragging) return;
+    dragging = false;
+    track.classList.remove('is-dragging');
+    if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+    setTimeout(() => { moved = false; }, 0);
+  };
+
+  track.addEventListener('pointerup', stopGraduatesDrag);
+  track.addEventListener('pointercancel', stopGraduatesDrag);
+  track.addEventListener('click', event => {
+    if (!moved) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, true);
+});
+
 const lightboxTriggers = document.querySelectorAll('[data-lightbox-src]');
 if (lightboxTriggers.length) {
   const lightbox = document.createElement('div');
@@ -355,9 +414,9 @@ faqItems.forEach(item => {
 document.documentElement.classList.add('motion-ready');
 
 const revealGroups = [
-  ['.section-head, .school-choice__head, .main-idea__inner, .story-split__copy, .faq__intro, .route__content', 'reveal-up'],
+  ['.section-head, .school-choice__head, .main-idea__inner, .story-split__copy, .faq__intro, .route__content, .graduates__head', 'reveal-up'],
   ['.choice-card, .photo-tile, .story-split__media, .owl-spot, .video-showcase__stage, .route__map', 'reveal-scale'],
-  ['.performance-item, .video-preview, .learn-card, .tuition-card, .faq__item', 'reveal-up'],
+  ['.performance-item, .video-preview, .learn-card, .tuition-card, .faq__item, .graduates-post', 'reveal-up'],
   ['.tuition__note, .footer__hero, .footer__social-inner', 'reveal-fade']
 ];
 
