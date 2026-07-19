@@ -1,0 +1,50 @@
+body.teachers-page{background:#fff}
+body.teachers-page .header{background:transparent;color:#fff;border-bottom:1px solid rgba(255,255,255,.18);box-shadow:none;backdrop-filter:none}
+body.teachers-page .header.scrolled,body.teachers-page .header.open{background:rgba(184, 255, 224, 0.73);color:var(--ink);box-shadow:0 8px 30px rgba(0,40,35,.08);backdrop-filter:blur(12px)}
+.lang-switch{width:38px;height:38px;display:grid;place-items:center;flex:0 0 auto;padding:0;border:1px solid rgba(255,255,255,.32);border-radius:12px;background:rgba(255,255,255,.1);color:inherit;box-shadow:inset 0 1px 0 rgba(255,255,255,.24);font-size:10px;font-weight:800;letter-spacing:.08em;cursor:pointer;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:background .2s,transform .2s}
+.lang-switch:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
+.header.scrolled .lang-switch{background:rgba(255,255,255,.5);border-color:rgba(255,255,255,.85)}body.teachers-page .header.scrolled .lang-switch,body.teachers-page .header.open .lang-switch{border-color:rgba(8,121,111,.18);background:rgba(8,121,111,.06)}
+body[data-lang="uk"] [data-ru],body[data-lang="ru"] [data-uk]{display:none!important}
+.teachers-intro{padding:138px 0 40px;background:linear-gradient(180deg,#178f80 0,#20b39d 118px,#fff 118px)}
+.teachers-intro__inner{text-align:center}
+.teachers-intro h1{margin:0 0 18px;color:var(--ink);font-family:Georgia,"Times New Roman",serif;font-size:clamp(48px,7vw,106px);line-height:.95;font-weight:700;letter-spacing:0;text-transform:uppercase}
+.teacher-tree{position:relative;width:min(880px,94vw);margin:0 auto;aspect-ratio:1.08/1}
+.teacher-tree__base{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.teacher-tree__photo{position:absolute;left:50%;top:7%;width:55%;height:58%;object-fit:cover;border:clamp(18px,3.1vw,42px) solid #3aa889;border-radius:clamp(20px,3vw,42px);box-shadow:0 22px 54px rgba(3,31,28,.18);transform:translateX(-50%)}
+.teachers-copy{padding:72px 0;background:#fff}
+.teachers-copy--second{background:#f7fbf9}
+.teachers-copy__inner{max-width:1040px;text-align:center}
+.teachers-copy p{margin:0 auto 20px;color:#243c36;font-size:clamp(21px,2.2vw,32px);line-height:1.34;font-weight:650;letter-spacing:-.02em}
+.teachers-copy p:last-child{margin-bottom:0}
+.teacher-portraits{padding:20px 0 74px;background:#fff}
+.teacher-portraits__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:center}
+.teacher-portraits img{width:100%;height:auto;object-fit:contain;border:1px solid rgba(255,255,255,.95);border-radius:28px;box-shadow:0 24px 62px rgba(8,78,68,.13)}
+.teachers-owls{padding:72px 0 28px;background:#fff;text-align:center}
+.teachers-owls img{width:min(520px,86vw);height:auto;margin:0 auto}
+.teachers-video{padding:78px 0 96px;background:radial-gradient(circle at 14% 16%,rgba(90,244,218,.25),transparent 26%),radial-gradient(circle at 88% 82%,rgba(178,255,241,.18),transparent 28%),#1f6f64}
+.teachers-video__inner{display:flex;justify-content:center}
+.teachers-video iframe{width:min(420px,88vw);aspect-ratio:9/16;border:1px solid rgba(255,255,255,.28);border-radius:30px;background:#123f38;box-shadow:0 28px 70px rgba(0,25,22,.28)}
+.teachers-page .contact{padding-top:92px;padding-bottom:92px;background:#f4f8f6}
+.teachers-page .contact__compact{grid-template-columns:minmax(260px,.78fr) minmax(420px,1fr)}
+.teachers-page .contact__actions{justify-self:end}
+.teachers-page .route{background:#fff}
+@media(max-width:900px){
+  .teachers-intro{padding-top:122px}
+  .teacher-tree{width:min(760px,98vw)}
+  .teacher-tree__photo{width:58%;height:58%}
+  .teacher-portraits__grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .teachers-intro{padding:106px 0 28px}
+  .teachers-intro h1{font-size:44px;margin-bottom:8px}
+  .teacher-tree{width:100%;aspect-ratio:1/1.08}
+  .teacher-tree__photo{top:9%;width:62%;height:55%;border-width:16px;border-radius:22px}
+  .teachers-copy{padding:56px 0}
+  .teachers-copy p{font-size:21px;line-height:1.32}
+  .teacher-portraits{padding-bottom:54px}
+  .teacher-portraits__grid{gap:16px}
+  .teacher-portraits img{border-radius:22px}
+  .teachers-video{padding-bottom:72px}
+  .teachers-video iframe{border-radius:24px}
+  .teachers-page .contact__actions{justify-self:center}
+}
