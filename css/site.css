@@ -29,7 +29,7 @@ img{height:auto}
 .owl-spot{display:block;width:min(190px,30vw);height:auto;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 18px 28px rgba(8,72,63,.16))}
 .owl-spot--learn{width:min(320px,48vw);margin-left:auto;filter:none}
 .owl-spot--school{width:min(430px,68vw);margin:0 auto;filter:none}
-.owl-spot--gallery{position:absolute;left:50%;top:0;z-index:0;width:min(620px,54vw);margin:0;opacity:.18;filter:none;pointer-events:none;transform:translateX(-50%)}
+.owl-spot--gallery{position:absolute;left:50%;top:0px;z-index:0;width:min(620px,54vw);margin:0;opacity:.18;filter:none;pointer-events:none;transform:translateX(-50%)}
 
 /* Motion system */
 .motion-ready .reveal{
@@ -712,7 +712,7 @@ input:focus,textarea:focus{
 
 .anchor-offset{display:block;position:relative;top:-110px;visibility:hidden}
 .school-choice{position:relative;background:#fcfdfc}
-.school-choice__head{min-height:clamp(0px,30vw,424px);align-items: flex-end;margin:-30px 0 55px;padding:40px 44px;border-radius:0 0 30px 30px;background-image:url("../images/domik.jpg");background-repeat:no-repeat;background-position:center;background-size:cover}
+.school-choice__head{min-height:clamp(260px,34vw,480px);align-items: flex-end;margin:0 0 55px;padding:40px 44px;border-radius:0 0 30px 30px;background-image:url("../images/domik.jpg");background-repeat:no-repeat;background-position:center top;background-size:cover}
 .school-choice__head .eyebrow{color:#071f1b}
 .choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;text-transform:uppercase}
 .choice-card{min-height:250px;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border:1px solid rgba(255,255,255,.92);border-radius:24px;background:linear-gradient(145deg,rgba(245,250,248,.82),rgba(255,255,255,.58));box-shadow:0 20px 55px rgba(13,75,67,.09),inset 0 1px 0 #fff}
@@ -774,13 +774,13 @@ input:focus,textarea:focus{
 .photo-gallery .section-head>div{position:relative;z-index:1}
 .photo-gallery--after-tuition{background:#fcfdfc}
 .photo-gallery--after-tuition .section-head{
-  min-height:clamp(320px,36vw,470px);
+  min-height:clamp(280px,36vw,400px);
   align-items:flex-end;
   margin-bottom:18px;
 }
 .photo-gallery--after-tuition .owl-spot--gallery{
   top:-42px;
-  width:min(840px,72vw);
+  width:min(672px,57.6vw);
   opacity:.24;
 }
 .photo-carousel{position:relative}
@@ -951,7 +951,7 @@ input:focus,textarea:focus{
   .photo-gallery .section-head{min-height:290px}
   .photo-gallery--after-tuition .section-head{min-height:420px;margin-bottom:10px}
   .owl-spot--gallery{left:50%;top:0;width:min(360px,88vw);margin:0;opacity:.14;transform:translateX(-50%)}
-  .photo-gallery--after-tuition .owl-spot--gallery{top:-28px;width:min(500px,118vw);opacity:.22}
+  .photo-gallery--after-tuition .owl-spot--gallery{top:-28px;width:min(400px,94.4vw);opacity:.22}
   .owl-spot--school{width:min(320px,82vw);margin:0 auto 28px}
   .video-showcase__layout{grid-template-columns:1fr}
   .video-showcase__playlist{height:380px}

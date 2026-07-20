@@ -13,7 +13,7 @@ body.evrika-page{background:#fcfdfc}
 .evrika-owls{padding:34px 0 24px;background:#fff;text-align:center}
 .evrika-owls img{display:block;width:min(640px,86vw);height:auto;margin:0 auto}
 .wonder{position:relative;overflow:hidden;background:#0f5f56;color:#fff}
-.wonder::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,42,37,.84),rgba(4,42,37,.58)),url("../images/school-students.png") center/cover no-repeat;opacity:.95}
+.wonder::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,42,37,.56),rgba(4,42,37,.28)),url("../images/evrika/shariki.jpg") center/cover no-repeat;opacity:.98}
 .wonder__inner{position:relative;z-index:1;max-width:860px}
 .wonder__text{margin-top:26px;font-size:clamp(26px,3.1vw,44px);line-height:1.18;font-weight:850;letter-spacing:-.035em}
 .wonder__text p{margin:0 0 18px}

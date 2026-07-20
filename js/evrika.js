@@ -22,7 +22,10 @@ const attributeTranslations = {
   '.contact-modal__close': { attribute: 'aria-label', uk: 'Закрити форму', ru: 'Закрыть форму' },
   '.footer__logo': { attribute: 'aria-label', uk: 'Повернутися нагору', ru: 'Вернуться наверх' },
   '.footer__to-top': { attribute: 'aria-label', uk: 'Повернутися нагору', ru: 'Вернуться наверх' },
-  '.footer__nav': { attribute: 'aria-label', uk: 'Навігація у підвалі', ru: 'Навигация в подвале' }
+  '.footer__nav': { attribute: 'aria-label', uk: 'Навігація у підвалі', ru: 'Навигация в подвале' },
+  '.footer__socials': { attribute: 'aria-label', uk: 'Соціальні мережі школи', ru: 'Социальные сети школы' },
+  '.footer__socials a[href*="instagram"]': { attribute: 'aria-label', uk: 'Instagram Європейської гімназії', ru: 'Instagram Европейской гимназии' },
+  '.footer__socials a[href*="youtube"]': { attribute: 'aria-label', uk: 'YouTube Європейської гімназії', ru: 'YouTube Европейской гимназии' }
 };
 
 const applyLanguage = (language) => {
