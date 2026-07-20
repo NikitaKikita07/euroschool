@@ -751,7 +751,7 @@ input:focus,textarea:focus{
   display:block;
   width:100%;
   aspect-ratio:848/636;
-  background:url("../images/main-idea-title.JPG") center/contain no-repeat;
+  background:url("../images/main-idea-title.jpg") center/contain no-repeat;
 }
 .main-idea__inner h2{
   position:absolute;
