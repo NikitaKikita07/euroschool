@@ -4,6 +4,50 @@ const nav = document.querySelector('.nav');
 const heroVideo = document.querySelector('.hero__video');
 const navDropdown = document.querySelector('.nav__dropdown');
 const navDropdownToggle = document.querySelector('.nav__dropdown-toggle');
+const languageSwitch = document.querySelector('.lang-switch');
+
+if (languageSwitch && !window.t) {
+  const setStaticLanguage = language => {
+    document.documentElement.lang = language;
+    document.body.dataset.lang = language;
+    languageSwitch.textContent = language === 'uk' ? 'UA' : 'RU';
+    languageSwitch.setAttribute(
+      'aria-label',
+      language === 'uk'
+        ? 'Переключить сайт на русский язык'
+        : 'Перемкнути сайт українською мовою'
+    );
+    document.querySelectorAll('[data-placeholder-ru],[data-placeholder-uk]').forEach(element => {
+      const value = element.dataset[`placeholder${language === 'uk' ? 'Uk' : 'Ru'}`];
+      if (value) element.setAttribute('placeholder', value);
+    });
+    document.querySelectorAll('[data-aria-label-ru],[data-aria-label-uk]').forEach(element => {
+      const value = element.dataset[`ariaLabel${language === 'uk' ? 'Uk' : 'Ru'}`];
+      if (value) element.setAttribute('aria-label', value);
+    });
+    document.querySelectorAll('[data-title-ru],[data-title-uk]').forEach(element => {
+      const value = element.dataset[`title${language === 'uk' ? 'Uk' : 'Ru'}`];
+      if (value) element.setAttribute('title', value);
+    });
+    document.querySelectorAll('[data-alt-ru],[data-alt-uk]').forEach(element => {
+      const value = element.dataset[`alt${language === 'uk' ? 'Uk' : 'Ru'}`];
+      if (value) element.setAttribute('alt', value);
+    });
+    localStorage.setItem('site-language', language);
+    window.siteLanguage = language;
+  };
+
+  const preferredLanguage = localStorage.getItem('site-language');
+  if (preferredLanguage === 'ru' || preferredLanguage === 'uk') {
+    setStaticLanguage(preferredLanguage);
+  } else {
+    setStaticLanguage(document.body.dataset.lang === 'ru' ? 'ru' : 'uk');
+  }
+
+  languageSwitch.addEventListener('click', () => {
+    setStaticLanguage(document.body.dataset.lang === 'uk' ? 'ru' : 'uk');
+  });
+}
 
 const startHeroVideo = () => {
   if (!heroVideo || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -417,7 +461,7 @@ const revealGroups = [
   ['.section-head, .school-choice__head, .main-idea__inner, .story-split__copy, .faq__intro, .route__content, .graduates__head', 'reveal-up'],
   ['.choice-card, .photo-tile, .story-split__media, .owl-spot, .video-showcase__stage, .route__map', 'reveal-scale'],
   ['.performance-item, .video-preview, .learn-card, .tuition-card, .faq__item, .graduates-post', 'reveal-up'],
-  ['.tuition__note, .footer__hero, .footer__social-inner', 'reveal-fade']
+  ['.tuition__note, .footer__hero', 'reveal-fade']
 ];
 
 const revealElements = [];
