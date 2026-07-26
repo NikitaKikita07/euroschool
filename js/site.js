@@ -118,7 +118,10 @@ const openContactModal = () => {
 };
 
 openContactModalButtons.forEach(button => {
-  button.addEventListener('click', openContactModal);
+  button.addEventListener('click', event => {
+    event.preventDefault();
+    openContactModal();
+  });
 });
 
 closeContactModalButtons.forEach(button => {
@@ -485,4 +488,17 @@ if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: re
   revealElements.forEach(element => revealObserver.observe(element));
 } else {
   revealElements.forEach(element => element.classList.add('is-visible'));
+}
+
+const storySplits = document.querySelectorAll('.story-split');
+if ('IntersectionObserver' in window && storySplits.length) {
+  const storyPhotoObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      entry.target.classList.toggle('story-split--photo-cycle-active', entry.isIntersecting);
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.18 });
+
+  storySplits.forEach(section => storyPhotoObserver.observe(section));
+} else {
+  storySplits.forEach(section => section.classList.add('story-split--photo-cycle-active'));
 }

@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="css/site.css?v=20260710-1">
   <script src="js/seo.js" defer></script>
   <script src="js/i18n.js" defer></script>
-  <script src="js/site.js?v=20260710-1" defer></script>
+  <script src="js/site.js?v=20260726-1" defer></script>
   <script async src="https://www.instagram.com/embed.js"></script>
 </head>
 <body data-lang="uk">
@@ -89,7 +89,7 @@
       <div class="container hero__content">
         <h1>ПРИВАТНА ШКОЛА ЄВРОПЕЙСЬКА ГІМНАЗІЯ ДНІПРО</h1>
         <div class="hero__actions">
-          <a class="button" href="#contacts">Записатися на зустріч <span>↗</span></a>
+          <a class="button" href="#contacts" data-contact-modal-open>Записатися на зустріч <span>↗</span></a>
           <div class="hero__socials" aria-label="Соціальні мережі школи">
             <a href="https://www.youtube.com/@euroschoolDPua/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube Європейської гімназії">
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -101,7 +101,8 @@
                 <path d="M7.7 2h8.6A5.7 5.7 0 0 1 22 7.7v8.6a5.7 5.7 0 0 1-5.7 5.7H7.7A5.7 5.7 0 0 1 2 16.3V7.7A5.7 5.7 0 0 1 7.7 2Zm-.2 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm9.25 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
               </svg>
             </a>
-            <span>Ми в соцмережах</span>
+            <span data-uk>Ми в соцмережах</span>
+            <span data-ru>Мы в соцсетях</span>
           </div>
         </div>
         <div class="hero__note"><span></span> Відкрито набір на 2026–2027 навчальний рік</div>
@@ -210,8 +211,8 @@
           <p>Кваліфікований щоденний медичний супровід лікаря-педіатра, домашнє харчування, зокрема дієтичний стіл, у просторій і світлій їдальні.</p>
         </div>
         <div class="story-split__media" aria-label="Шкільне фото">
-          <img src="images/carousel/carousel03.JPG" alt="" loading="lazy" decoding="async">
           <img src="images/carousel/carousel04.JPG" alt="" loading="lazy" decoding="async">
+          <img src="images/carousel/carousel03.JPG" alt="" loading="lazy" decoding="async">
         </div>
       </div>
     </section>
@@ -226,8 +227,8 @@
           <p>Для нас радість, коли випускники кажуть, що відбулися як особистості завдяки Гімназії.</p>
         </div>
         <div class="story-split__media" aria-label="Шкільне фото">
-          <img src="images/carousel/carousel05.JPG" alt="" loading="lazy" decoding="async">
           <img src="images/n8.JPG" alt="" loading="lazy" decoding="async">
+          <img src="images/carousel/carousel05.JPG" alt="" loading="lazy" decoding="async">
         </div>
       </div>
     </section>
@@ -291,8 +292,12 @@
           </div>
         </div>
         <div class="video-showcase__previews" aria-label="Додаткові відео">
-          <iframe src="https://www.youtube.com/embed/13Nm8MQeU8I?rel=0&playsinline=1" title="Футбол 2025" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           <iframe src="https://www.youtube.com/embed/LZ5qk3rOTVw?rel=0&playsinline=1" title="Вистава «МОМО у пошуках втраченого часу»" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/13Nm8MQeU8I?rel=0&playsinline=1" title="Футбол 2025" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="video-showcase__previews" aria-label="Додаткові відео">
+          <iframe src="https://www.youtube.com/embed/MXl0XA1f474?rel=0&playsinline=1" title="З Новим роком - Європейська гімназія 2025!" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/pcMR1H4iC4g?rel=0&playsinline=1" title="Рухайся разом із нами!" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
       </div>
     </section>
@@ -486,10 +491,10 @@
         <div class="photo-carousel photo-carousel--vertical">
           <button class="photo-carousel__arrow photo-carousel__arrow--prev" type="button" aria-label="Попередні фотографії">←</button>
           <div class="photo-grid photo-grid--compact photo-grid--vertical">
-            <div class="photo-tile"><img src="images/galery/n1.JPG" alt="Фотогалерея школи 01exp" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/n1.JPG" aria-label="Збільшити фото"></button></div>
-            <div class="photo-tile"><img src="images/galery/n2.jpg" alt="Фотогалерея школи 4" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/n2.jpg" aria-label="Збільшити фото"></button></div>
             <div class="photo-tile"><img src="images/galery/n7.JPG" alt="Фотогалерея школи 7" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/n7.JPG" aria-label="Збільшити фото"></button></div>
             <div class="photo-tile"><img src="images/galery/n4.jpg" alt="Фотогалерея школи 2" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/n4.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/n2.jpg" alt="Фотогалерея школи 4" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/n2.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/n1.JPG" alt="Фотогалерея школи 01exp" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/n1.JPG" aria-label="Збільшити фото"></button></div>
           </div>
           <button class="photo-carousel__arrow photo-carousel__arrow--next" type="button" aria-label="Наступні фотографії">→</button>
         </div>
