@@ -99,17 +99,75 @@ langButton?.addEventListener('click', () => {
   applyLanguage(document.body.dataset.lang === 'ru' ? 'uk' : 'ru');
 });
 
-document.querySelectorAll('.photo-carousel').forEach((carousel) => {
+const setupLoopedCarousel = (carousel) => {
   const grid = carousel.querySelector('.photo-grid');
   const prev = carousel.querySelector('.photo-carousel__arrow--prev');
   const next = carousel.querySelector('.photo-carousel__arrow--next');
-  const step = () => Math.max(260, Math.round((grid?.clientWidth || 320) * 0.72));
+  if (!grid || !prev || !next) return;
 
-  prev?.addEventListener('click', () => grid?.scrollBy({ left: -step(), behavior: 'smooth' }));
-  next?.addEventListener('click', () => grid?.scrollBy({ left: step(), behavior: 'smooth' }));
-});
+  const originals = Array.from(grid.children);
+  if (!originals.length) return;
+
+  originals.forEach((item) => {
+    const clone = item.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    grid.append(clone);
+  });
+  originals.slice().reverse().forEach((item) => {
+    const clone = item.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    grid.prepend(clone);
+  });
+
+  let cycleWidth = 0;
+  let normalizeTimer = 0;
+
+  const measure = () => {
+    const gap = Number.parseFloat(getComputedStyle(grid).columnGap || getComputedStyle(grid).gap) || 0;
+    cycleWidth = originals.reduce((sum, item) => sum + item.getBoundingClientRect().width, 0) + gap * originals.length;
+    if (cycleWidth > 0 && (grid.scrollLeft < cycleWidth * 0.5 || grid.scrollLeft > cycleWidth * 1.5)) {
+      grid.scrollLeft = cycleWidth;
+    }
+  };
+
+  const normalize = () => {
+    if (!cycleWidth) return;
+    if (grid.scrollLeft < cycleWidth * 0.35) grid.scrollLeft += cycleWidth;
+    if (grid.scrollLeft > cycleWidth * 1.65) grid.scrollLeft -= cycleWidth;
+  };
+
+  const scheduleNormalize = () => {
+    clearTimeout(normalizeTimer);
+    normalizeTimer = setTimeout(normalize, 120);
+  };
+
+  const step = () => Math.max(260, Math.round(grid.clientWidth * 0.72));
+  const moveCarousel = (direction) => {
+    normalize();
+    grid.scrollTo({ left: grid.scrollLeft + direction * step(), behavior: 'smooth' });
+    setTimeout(normalize, 380);
+  };
+
+  requestAnimationFrame(measure);
+  window.addEventListener('resize', measure, { passive: true });
+  grid.addEventListener('scroll', scheduleNormalize, { passive: true });
+  prev.addEventListener('click', () => moveCarousel(-1));
+  next.addEventListener('click', () => moveCarousel(1));
+};
+
+document.querySelectorAll('.photo-carousel').forEach(setupLoopedCarousel);
 
 const evrikaPlayer = document.getElementById('evrika-player');
+
+const getEvrikaVideoTitle = (item) => {
+  const language = document.body.dataset.lang === 'ru' ? 'ru' : 'uk';
+  return item.dataset[`videoTitle${language === 'ru' ? 'Ru' : 'Uk'}`] || item.dataset.videoTitle || 'Видео';
+};
+
+const syncEvrikaVideoTitle = () => {
+  const activeItem = document.querySelector('.performance-item.active');
+  if (activeItem && evrikaPlayer) evrikaPlayer.title = getEvrikaVideoTitle(activeItem);
+};
 
 document.querySelectorAll('.performance-item').forEach((item) => {
   item.addEventListener('click', () => {
@@ -119,6 +177,7 @@ document.querySelectorAll('.performance-item').forEach((item) => {
 
     evrikaPlayer.src = `https://www.youtube.com/embed/${videoId}?rel=0&playsinline=1`;
     evrikaPlayer.title = item.dataset.videoTitle || 'Видео';
+    evrikaPlayer.title = getEvrikaVideoTitle(item);
 
     document.querySelectorAll('.performance-item').forEach((button) => {
       const active = button === item;
@@ -127,6 +186,12 @@ document.querySelectorAll('.performance-item').forEach((item) => {
     });
   });
 });
+
+langButton?.addEventListener('click', () => {
+  setTimeout(syncEvrikaVideoTitle, 0);
+});
+
+syncEvrikaVideoTitle();
 
 const modal = document.querySelector('.contact-modal');
 const openModal = () => {

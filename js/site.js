@@ -320,7 +320,12 @@ document.querySelectorAll('.graduates-carousel').forEach(carousel => {
   };
 
   const moveGraduatesCarousel = direction => {
-    track.scrollBy({ left: direction * slideStep(), behavior: 'smooth' });
+    const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+    const edgeOffset = 8;
+    let target = track.scrollLeft + direction * slideStep();
+    if (direction < 0 && track.scrollLeft <= edgeOffset) target = maxScroll;
+    if (direction > 0 && track.scrollLeft >= maxScroll - edgeOffset) target = 0;
+    track.scrollTo({ left: Math.max(0, Math.min(maxScroll, target)), behavior: 'smooth' });
   };
 
   prev.addEventListener('click', () => moveGraduatesCarousel(-1));
@@ -419,9 +424,14 @@ const performanceItems = performanceSection ? performanceSection.querySelectorAl
 const videoPreviews = performanceSection ? performanceSection.querySelectorAll('.video-preview') : [];
 
 if (performancePlayer) {
+  const getVideoTitle = item => {
+    const language = document.body.dataset.lang === 'ru' ? 'ru' : 'uk';
+    return item.dataset[`videoTitle${language === 'ru' ? 'Ru' : 'Uk'}`] || item.dataset.videoTitle || 'Видео';
+  };
+
   const selectVideo = item => {
     const videoId = item.dataset.videoId;
-    const videoTitle = item.dataset.videoTitle;
+    const videoTitle = getVideoTitle(item);
 
     performanceItems.forEach(button => {
       const selected = button === item;
@@ -438,6 +448,11 @@ if (performancePlayer) {
     performancePlayer.dataset.src = performancePlayer.src;
   };
 
+  const syncActiveVideoTitle = () => {
+    const activeItem = performanceSection.querySelector('.performance-item.active');
+    if (activeItem) performancePlayer.title = getVideoTitle(activeItem);
+  };
+
   performanceItems.forEach(item => {
     item.addEventListener('click', () => selectVideo(item));
   });
@@ -445,6 +460,12 @@ if (performancePlayer) {
   videoPreviews.forEach(item => {
     item.addEventListener('click', () => selectVideo(item));
   });
+
+  document.querySelector('.lang-switch')?.addEventListener('click', () => {
+    setTimeout(syncActiveVideoTitle, 0);
+  });
+
+  syncActiveVideoTitle();
 }
 
 const faqItems = document.querySelectorAll('.faq__item');
