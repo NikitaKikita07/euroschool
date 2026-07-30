@@ -197,76 +197,72 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 const photoTracks = document.querySelectorAll('.photo-grid');
 let openLightbox = null;
-photoTracks.forEach(track => {
+const setupSeamlessCarousel = (track, options = {}) => {
   const originals = Array.from(track.children);
-  if (!originals.length) return;
+  if (originals.length < 2) return null;
 
-  originals.forEach(item => {
+  const makeClones = () => originals.map(item => {
     const clone = item.cloneNode(true);
+    clone.dataset.loopClone = 'true';
     clone.setAttribute('aria-hidden', 'true');
-    clone.tabIndex = -1;
-    track.append(clone);
-  });
-  originals.slice().reverse().forEach(item => {
-    const clone = item.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true');
-    clone.tabIndex = -1;
-    track.prepend(clone);
+    clone.querySelectorAll('a,button,input,textarea,select,iframe,[tabindex]').forEach(element => {
+      element.setAttribute('tabindex', '-1');
+    });
+    return clone;
   });
 
-  const carousel = track.closest('.photo-carousel');
-  const prev = carousel.querySelector('.photo-carousel__arrow--prev');
-  const next = carousel.querySelector('.photo-carousel__arrow--next');
-  let cycleWidth = 0;
+  track.prepend(...makeClones());
+  track.append(...makeClones());
+
+  const firstOriginal = originals[0];
+  const firstAfterOriginals = originals[originals.length - 1].nextElementSibling;
+
+  const measure = () => ({
+    start: firstOriginal.offsetLeft,
+    width: Math.max(0, firstAfterOriginals.offsetLeft - firstOriginal.offsetLeft)
+  });
+
+  const normalize = () => {
+    const { start, width } = measure();
+    if (!width) return;
+    const left = track.scrollLeft;
+    if (left < start - width * 0.65) track.scrollLeft = left + width;
+    if (left > start + width * 0.65) track.scrollLeft = left - width;
+  };
+
+  let normalizeFrame = 0;
+  const scheduleNormalize = () => {
+    cancelAnimationFrame(normalizeFrame);
+    normalizeFrame = requestAnimationFrame(normalize);
+  };
+
+  const firstSlide = () => track.querySelector(':scope > :not([data-loop-clone])') || track.firstElementChild;
+  const defaultStep = () => {
+    const slide = firstSlide();
+    if (!slide) return track.clientWidth * 0.85;
+    const gap = Number.parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+    return slide.getBoundingClientRect().width + gap;
+  };
+
+  const move = direction => {
+    track.scrollTo({ left: track.scrollLeft + direction * (options.step?.(track) || defaultStep()), behavior: 'smooth' });
+    window.setTimeout(scheduleNormalize, 380);
+  };
+
+  requestAnimationFrame(() => {
+    track.scrollLeft = measure().start;
+  });
+  addEventListener('resize', scheduleNormalize, { passive: true });
+  track.addEventListener('scroll', scheduleNormalize, { passive: true });
+
   let dragging = false;
   let startX = 0;
   let startScroll = 0;
   let moved = false;
-  let clickLocked = false;
-  let normalizeTimer = 0;
-
-  const measure = () => {
-    cycleWidth = originals.reduce((sum, item) => sum + item.getBoundingClientRect().width, 0);
-    const gap = Number.parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
-    cycleWidth += gap * originals.length;
-    if (track.scrollLeft < cycleWidth * 0.5 || track.scrollLeft > cycleWidth * 1.5) {
-      track.scrollLeft = cycleWidth;
-    }
-  };
-
-  requestAnimationFrame(measure);
-  addEventListener('resize', measure, { passive: true });
-
-  const normalize = () => {
-    if (!cycleWidth) return;
-    if (track.scrollLeft < cycleWidth * 0.35) track.scrollLeft += cycleWidth;
-    if (track.scrollLeft > cycleWidth * 1.65) track.scrollLeft -= cycleWidth;
-  };
-
-  const scheduleNormalize = () => {
-    clearTimeout(normalizeTimer);
-    normalizeTimer = setTimeout(normalize, 120);
-  };
-
-  const step = () => track.clientWidth * 0.78;
-  const moveCarousel = direction => {
-    if (clickLocked || !cycleWidth) return;
-    clickLocked = true;
-    normalize();
-    track.scrollTo({ left: track.scrollLeft + direction * step(), behavior: 'smooth' });
-    setTimeout(() => {
-      clickLocked = false;
-      normalize();
-    }, 360);
-  };
-
-  prev.addEventListener('click', () => moveCarousel(-1));
-  next.addEventListener('click', () => moveCarousel(1));
-  track.addEventListener('scroll', scheduleNormalize, { passive: true });
 
   track.addEventListener('pointerdown', event => {
     if (event.pointerType === 'touch') return;
-    if (event.target.closest('[data-lightbox-src]')) return;
+    if (options.ignorePointerDown?.(event)) return;
     dragging = true;
     moved = false;
     startX = event.clientX;
@@ -280,6 +276,7 @@ photoTracks.forEach(track => {
     const distance = event.clientX - startX;
     if (Math.abs(distance) > 6) moved = true;
     track.scrollLeft = startScroll - distance;
+    scheduleNormalize();
   });
 
   const stopDrag = event => {
@@ -287,7 +284,7 @@ photoTracks.forEach(track => {
     dragging = false;
     track.classList.remove('is-dragging');
     if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
-    normalize();
+    scheduleNormalize();
     setTimeout(() => { moved = false; }, 0);
   };
 
@@ -299,6 +296,35 @@ photoTracks.forEach(track => {
     event.stopImmediatePropagation();
   }, true);
 
+  return { move, normalize };
+};
+
+photoTracks.forEach(track => {
+  const carousel = track.closest('.photo-carousel');
+  const prev = carousel?.querySelector('.photo-carousel__arrow--prev');
+  const next = carousel?.querySelector('.photo-carousel__arrow--next');
+  if (!prev || !next) return;
+
+  let clickLocked = false;
+  const loop = setupSeamlessCarousel(track, {
+    step: () => track.clientWidth * 0.78,
+    ignorePointerDown: event => event.target.closest('[data-lightbox-src]')
+  });
+  if (!loop) return;
+
+  const moveCarousel = direction => {
+    if (clickLocked) return;
+    clickLocked = true;
+    loop.normalize();
+    loop.move(direction);
+    setTimeout(() => {
+      clickLocked = false;
+      loop.normalize();
+    }, 360);
+  };
+
+  prev.addEventListener('click', () => moveCarousel(-1));
+  next.addEventListener('click', () => moveCarousel(1));
 });
 
 document.querySelectorAll('.graduates-carousel').forEach(carousel => {
@@ -307,62 +333,15 @@ document.querySelectorAll('.graduates-carousel').forEach(carousel => {
   const next = carousel.closest('.graduates')?.querySelector('.graduates-carousel__arrow--next');
   if (!track || !prev || !next) return;
 
-  let dragging = false;
-  let startX = 0;
-  let startScroll = 0;
-  let moved = false;
-
-  const slideStep = () => {
-    const slide = track.querySelector('.graduates-post');
-    if (!slide) return track.clientWidth * 0.85;
-    const gap = Number.parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
-    return slide.getBoundingClientRect().width + gap;
-  };
+  const loop = setupSeamlessCarousel(track);
+  if (!loop) return;
 
   const moveGraduatesCarousel = direction => {
-    const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
-    const edgeOffset = 8;
-    let target = track.scrollLeft + direction * slideStep();
-    if (direction < 0 && track.scrollLeft <= edgeOffset) target = maxScroll;
-    if (direction > 0 && track.scrollLeft >= maxScroll - edgeOffset) target = 0;
-    track.scrollTo({ left: Math.max(0, Math.min(maxScroll, target)), behavior: 'smooth' });
+    loop.move(direction);
   };
 
   prev.addEventListener('click', () => moveGraduatesCarousel(-1));
   next.addEventListener('click', () => moveGraduatesCarousel(1));
-
-  track.addEventListener('pointerdown', event => {
-    if (event.pointerType === 'touch') return;
-    dragging = true;
-    moved = false;
-    startX = event.clientX;
-    startScroll = track.scrollLeft;
-    track.classList.add('is-dragging');
-    track.setPointerCapture(event.pointerId);
-  });
-
-  track.addEventListener('pointermove', event => {
-    if (!dragging) return;
-    const distance = event.clientX - startX;
-    if (Math.abs(distance) > 6) moved = true;
-    track.scrollLeft = startScroll - distance;
-  });
-
-  const stopGraduatesDrag = event => {
-    if (!dragging) return;
-    dragging = false;
-    track.classList.remove('is-dragging');
-    if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
-    setTimeout(() => { moved = false; }, 0);
-  };
-
-  track.addEventListener('pointerup', stopGraduatesDrag);
-  track.addEventListener('pointercancel', stopGraduatesDrag);
-  track.addEventListener('click', event => {
-    if (!moved) return;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-  }, true);
 });
 
 const lightboxTriggers = document.querySelectorAll('[data-lightbox-src]');

@@ -6,21 +6,64 @@ document.querySelectorAll('[data-creative-gallery]').forEach(gallery => {
   if (!rows.length || !prev || !next) return;
 
   const slideStep = row => {
-    const item = row.firstElementChild;
+    const item = row.querySelector(':scope > :not([data-loop-clone])') || row.firstElementChild;
     if (!item) return row.clientWidth * 0.85;
     const gap = Number.parseFloat(getComputedStyle(row).gap) || 0;
     return item.getBoundingClientRect().width + gap;
   };
 
+  const setupLoop = row => {
+    const originals = [...row.children];
+    if (originals.length < 2) return null;
+
+    const cloneItems = () => originals.map(item => {
+      const clone = item.cloneNode(true);
+      clone.dataset.loopClone = 'true';
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('a,button,input,textarea,select,iframe,[tabindex]').forEach(element => {
+        element.setAttribute('tabindex', '-1');
+      });
+      return clone;
+    });
+
+    row.prepend(...cloneItems());
+    row.append(...cloneItems());
+
+    const firstOriginal = originals[0];
+    const firstAfterClone = originals[originals.length - 1].nextElementSibling;
+    const measure = () => ({
+      start: firstOriginal.offsetLeft,
+      width: Math.max(0, firstAfterClone.offsetLeft - firstOriginal.offsetLeft)
+    });
+
+    const normalize = () => {
+      const { start, width } = measure();
+      if (!width) return;
+      const left = row.scrollLeft;
+      if (left < start - width * 0.65) row.scrollLeft = left + width;
+      if (left > start + width * 0.65) row.scrollLeft = left - width;
+    };
+
+    requestAnimationFrame(() => {
+      row.scrollLeft = measure().start;
+    });
+
+    return normalize;
+  };
+
+  const normalizers = rows.map(setupLoop).filter(Boolean);
+  let normalizeFrame = 0;
+  const scheduleNormalize = () => {
+    cancelAnimationFrame(normalizeFrame);
+    normalizeFrame = requestAnimationFrame(() => normalizers.forEach(normalize => normalize()));
+  };
+
   const moveRows = direction => {
     rows.forEach(row => {
-      const maxScroll = Math.max(0, row.scrollWidth - row.clientWidth);
-      const edgeOffset = 8;
       let target = row.scrollLeft + direction * slideStep(row);
-      if (direction < 0 && row.scrollLeft <= edgeOffset) target = maxScroll;
-      if (direction > 0 && row.scrollLeft >= maxScroll - edgeOffset) target = 0;
-      row.scrollTo({ left: Math.max(0, Math.min(maxScroll, target)), behavior: 'smooth' });
+      row.scrollTo({ left: target, behavior: 'smooth' });
     });
+    window.setTimeout(scheduleNormalize, 380);
   };
 
   prev.addEventListener('click', () => moveRows(-1));
@@ -47,6 +90,7 @@ document.querySelectorAll('[data-creative-gallery]').forEach(gallery => {
       const distance = event.clientX - startX;
       if (Math.abs(distance) > 6) moved = true;
       row.scrollLeft = startScroll - distance;
+      scheduleNormalize();
     });
 
     const stopDrag = event => {
@@ -54,11 +98,13 @@ document.querySelectorAll('[data-creative-gallery]').forEach(gallery => {
       dragging = false;
       row.classList.remove('is-dragging');
       if (row.hasPointerCapture(event.pointerId)) row.releasePointerCapture(event.pointerId);
+      scheduleNormalize();
       setTimeout(() => { moved = false; }, 0);
     };
 
     row.addEventListener('pointerup', stopDrag);
     row.addEventListener('pointercancel', stopDrag);
+    row.addEventListener('scroll', scheduleNormalize, { passive: true });
     row.addEventListener('click', event => {
       if (!moved) return;
       event.preventDefault();

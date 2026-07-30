@@ -106,50 +106,54 @@ const setupLoopedCarousel = (carousel) => {
   if (!grid || !prev || !next) return;
 
   const originals = Array.from(grid.children);
-  if (!originals.length) return;
+  if (originals.length < 2) return;
 
-  originals.forEach((item) => {
+  const cloneItems = () => originals.map((item) => {
     const clone = item.cloneNode(true);
+    clone.dataset.loopClone = 'true';
     clone.setAttribute('aria-hidden', 'true');
-    grid.append(clone);
-  });
-  originals.slice().reverse().forEach((item) => {
-    const clone = item.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true');
-    grid.prepend(clone);
+    clone.querySelectorAll('a,button,input,textarea,select,iframe,[tabindex]').forEach((element) => {
+      element.setAttribute('tabindex', '-1');
+    });
+    return clone;
   });
 
-  let cycleWidth = 0;
-  let normalizeTimer = 0;
+  grid.prepend(...cloneItems());
+  grid.append(...cloneItems());
 
-  const measure = () => {
-    const gap = Number.parseFloat(getComputedStyle(grid).columnGap || getComputedStyle(grid).gap) || 0;
-    cycleWidth = originals.reduce((sum, item) => sum + item.getBoundingClientRect().width, 0) + gap * originals.length;
-    if (cycleWidth > 0 && (grid.scrollLeft < cycleWidth * 0.5 || grid.scrollLeft > cycleWidth * 1.5)) {
-      grid.scrollLeft = cycleWidth;
-    }
-  };
+  const firstOriginal = originals[0];
+  const firstAfterOriginals = originals[originals.length - 1].nextElementSibling;
+
+  const measure = () => ({
+    start: firstOriginal.offsetLeft,
+    width: Math.max(0, firstAfterOriginals.offsetLeft - firstOriginal.offsetLeft)
+  });
 
   const normalize = () => {
-    if (!cycleWidth) return;
-    if (grid.scrollLeft < cycleWidth * 0.35) grid.scrollLeft += cycleWidth;
-    if (grid.scrollLeft > cycleWidth * 1.65) grid.scrollLeft -= cycleWidth;
+    const { start, width } = measure();
+    if (!width) return;
+    const left = grid.scrollLeft;
+    if (left < start - width * 0.65) grid.scrollLeft = left + width;
+    if (left > start + width * 0.65) grid.scrollLeft = left - width;
   };
 
+  let normalizeFrame = 0;
   const scheduleNormalize = () => {
-    clearTimeout(normalizeTimer);
-    normalizeTimer = setTimeout(normalize, 120);
+    cancelAnimationFrame(normalizeFrame);
+    normalizeFrame = requestAnimationFrame(normalize);
   };
 
   const step = () => Math.max(260, Math.round(grid.clientWidth * 0.72));
   const moveCarousel = (direction) => {
     normalize();
     grid.scrollTo({ left: grid.scrollLeft + direction * step(), behavior: 'smooth' });
-    setTimeout(normalize, 380);
+    setTimeout(scheduleNormalize, 380);
   };
 
-  requestAnimationFrame(measure);
-  window.addEventListener('resize', measure, { passive: true });
+  requestAnimationFrame(() => {
+    grid.scrollLeft = measure().start;
+  });
+  window.addEventListener('resize', scheduleNormalize, { passive: true });
   grid.addEventListener('scroll', scheduleNormalize, { passive: true });
   prev.addEventListener('click', () => moveCarousel(-1));
   next.addEventListener('click', () => moveCarousel(1));
