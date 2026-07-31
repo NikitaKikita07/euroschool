@@ -31,7 +31,9 @@ body.evrika-page{background:#fcfdfc}
 .placeholder-carousel{background:#fcfdfc}
 .placeholder-tile{height:310px;display:grid;place-items:center;flex:0 0 360px;overflow:hidden;border:1px solid rgba(8,121,111,.12);border-radius:24px;background:linear-gradient(135deg,#eef7f4,#fff);box-shadow:0 18px 48px rgba(9,73,64,.1);color:rgba(20,70,61,.44);font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
 .placeholder-tile img{width:100%;height:100%;object-fit:cover}
-.evrika-owllike{position:absolute;left:50%;top:-20px;width:min(360px,52vw);height:auto;transform:translateX(-50%);opacity:.96;pointer-events:none}
+.evrika-page .photo-gallery--after-tuition{padding-top:28px;padding-bottom:34px}
+.evrika-page .photo-gallery--after-tuition .section-head{min-height:250px;margin-bottom:8px}
+.evrika-owllike{position:absolute;left:50%;top:-10px;width:min(250px,46vw);height:auto;transform:translateX(-50%);opacity:.96;pointer-events:none}
 .owl-sleep{background:#fff;text-align:center}
 .owl-sleep img{width:min(620px,88vw);margin:0 auto}
 body[data-lang="uk"] [data-ru],body[data-lang="ru"] [data-uk]{display:none!important}
@@ -49,5 +51,7 @@ body[data-lang="uk"] [data-ru],body[data-lang="ru"] [data-uk]{display:none!impor
   .tile-grid{grid-template-columns:1fr}
   .tile-grid .photo-tile,.tile-grid .photo-tile--wide{grid-column:auto;height:250px}
   .placeholder-tile{flex-basis:82vw;height:250px}
-  .evrika-owllike{top:18px;width:min(260px,68vw)}
+  .evrika-page .photo-gallery--after-tuition{padding-top:44px;padding-bottom:52px}
+  .evrika-page .photo-gallery--after-tuition .section-head{min-height:270px;margin-bottom:8px}
+  .evrika-owllike{top:34px;width:min(210px,58vw)}
 }
