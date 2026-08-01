@@ -120,15 +120,44 @@ if (projectImages.length) {
   lightbox.setAttribute('role', 'dialog');
   lightbox.setAttribute('aria-modal', 'true');
   lightbox.setAttribute('aria-hidden', 'true');
-  lightbox.innerHTML = '<button type="button" aria-label="Закрити збільшене зображення">×</button><img alt="">';
+  lightbox.innerHTML = '<button class="project-lightbox__close" type="button" aria-label="Закрити збільшене зображення">×</button><button class="project-lightbox__nav project-lightbox__nav--prev" type="button" aria-label="Попереднє фото">&lt;</button><img alt=""><button class="project-lightbox__nav project-lightbox__nav--next" type="button" aria-label="Наступне фото">&gt;</button>';
   document.body.append(lightbox);
 
   const lightboxImage = lightbox.querySelector('img');
-  const closeButton = lightbox.querySelector('button');
+  const closeButton = lightbox.querySelector('.project-lightbox__close');
+  const prevButton = lightbox.querySelector('.project-lightbox__nav--prev');
+  const nextButton = lightbox.querySelector('.project-lightbox__nav--next');
+  let activeImages = [];
+  let activeIndex = 0;
+
+  const updateLightboxNav = () => {
+    if (!lightbox.classList.contains('is-open')) return;
+    const rect = lightboxImage.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const navGap = 8;
+    const navWidth = prevButton.getBoundingClientRect().width || 44;
+    const offset = navWidth + navGap;
+    lightbox.style.setProperty('--lightbox-nav-left', `${Math.max(10, rect.left - offset)}px`);
+    lightbox.style.setProperty('--lightbox-nav-right', `${Math.max(10, window.innerWidth - rect.right - offset)}px`);
+  };
+
+  const setLightboxImage = index => {
+    if (!activeImages.length) return;
+    activeIndex = (index + activeImages.length) % activeImages.length;
+    const image = activeImages[activeIndex];
+    lightboxImage.src = image.currentSrc || image.src;
+    lightboxImage.alt = image.alt || '';
+    if (lightboxImage.complete) requestAnimationFrame(updateLightboxNav);
+  };
+
+  const moveLightbox = direction => {
+    setLightboxImage(activeIndex + direction);
+  };
 
   const closeLightbox = () => {
     lightbox.classList.remove('is-open');
     lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImage.removeAttribute('src');
     document.body.style.overflow = '';
   };
 
@@ -138,20 +167,31 @@ if (projectImages.length) {
     });
 
     image.addEventListener('click', () => {
-      lightboxImage.src = image.currentSrc || image.src;
-      lightboxImage.alt = image.alt || '';
+      const gallery = image.closest('.project-gallery');
+      activeImages = [...gallery.querySelectorAll('.vertical-photo:not([data-loop-clone]) img')];
+      const imageSrc = image.getAttribute('src');
+      const startIndex = activeImages.findIndex(item => item.getAttribute('src') === imageSrc);
+      setLightboxImage(Math.max(0, startIndex));
       lightbox.classList.add('is-open');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
       closeButton.focus();
+      requestAnimationFrame(updateLightboxNav);
     });
   });
 
+  lightboxImage.addEventListener('load', updateLightboxNav);
+  window.addEventListener('resize', updateLightboxNav);
   closeButton.addEventListener('click', closeLightbox);
+  prevButton.addEventListener('click', () => moveLightbox(-1));
+  nextButton.addEventListener('click', () => moveLightbox(1));
   lightbox.addEventListener('click', event => {
     if (event.target === lightbox) closeLightbox();
   });
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+    if (!lightbox.classList.contains('is-open')) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') moveLightbox(-1);
+    if (event.key === 'ArrowRight') moveLightbox(1);
   });
 }

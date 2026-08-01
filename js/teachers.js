@@ -138,36 +138,69 @@ if (statsImageButtons.length) {
   lightbox.setAttribute('role', 'dialog');
   lightbox.setAttribute('aria-modal', 'true');
   lightbox.setAttribute('aria-hidden', 'true');
-  lightbox.innerHTML = '<button type="button" aria-label="Закрити збільшене зображення">×</button><img alt="">';
+  lightbox.innerHTML = '<button class="stats-image-lightbox__close" type="button" aria-label="Закрити збільшене зображення">×</button><button class="stats-image-lightbox__nav stats-image-lightbox__nav--prev" type="button" aria-label="Попереднє фото">&lt;</button><img alt=""><button class="stats-image-lightbox__nav stats-image-lightbox__nav--next" type="button" aria-label="Наступне фото">&gt;</button>';
   document.body.append(lightbox);
 
   const lightboxImage = lightbox.querySelector('img');
-  const closeButton = lightbox.querySelector('button');
+  const closeButton = lightbox.querySelector('.stats-image-lightbox__close');
+  const prevButton = lightbox.querySelector('.stats-image-lightbox__nav--prev');
+  const nextButton = lightbox.querySelector('.stats-image-lightbox__nav--next');
+  let activeIndex = 0;
+
+  const updateLightboxNav = () => {
+    if (!lightbox.classList.contains('is-open')) return;
+    const rect = lightboxImage.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const navGap = 8;
+    const navWidth = prevButton.getBoundingClientRect().width || 44;
+    const offset = navWidth + navGap;
+    lightbox.style.setProperty('--lightbox-nav-left', `${Math.max(10, rect.left - offset)}px`);
+    lightbox.style.setProperty('--lightbox-nav-right', `${Math.max(10, window.innerWidth - rect.right - offset)}px`);
+  };
+
+  const setLightboxImage = index => {
+    activeIndex = (index + statsImageButtons.length) % statsImageButtons.length;
+    const image = statsImageButtons[activeIndex].querySelector('img');
+    if (!image) return;
+    lightboxImage.src = image.currentSrc || image.src;
+    lightboxImage.alt = image.alt || '';
+    if (lightboxImage.complete) requestAnimationFrame(updateLightboxNav);
+  };
+
+  const moveLightbox = direction => {
+    setLightboxImage(activeIndex + direction);
+  };
 
   const closeLightbox = () => {
     lightbox.classList.remove('is-open');
     lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImage.removeAttribute('src');
     document.body.classList.remove('modal-open');
   };
 
-  statsImageButtons.forEach(button => {
+  statsImageButtons.forEach((button, index) => {
     button.addEventListener('click', () => {
-      const image = button.querySelector('img');
-      if (!image) return;
-      lightboxImage.src = image.currentSrc || image.src;
-      lightboxImage.alt = image.alt || '';
+      setLightboxImage(index);
       lightbox.classList.add('is-open');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.classList.add('modal-open');
       closeButton.focus();
+      requestAnimationFrame(updateLightboxNav);
     });
   });
 
+  lightboxImage.addEventListener('load', updateLightboxNav);
+  window.addEventListener('resize', updateLightboxNav, { passive: true });
   closeButton.addEventListener('click', closeLightbox);
+  prevButton.addEventListener('click', () => moveLightbox(-1));
+  nextButton.addEventListener('click', () => moveLightbox(1));
   lightbox.addEventListener('click', event => {
     if (event.target === lightbox) closeLightbox();
   });
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+    if (!lightbox.classList.contains('is-open')) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') moveLightbox(-1);
+    if (event.key === 'ArrowRight') moveLightbox(1);
   });
 }

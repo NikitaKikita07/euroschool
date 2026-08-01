@@ -99,6 +99,17 @@ langButton?.addEventListener('click', () => {
   applyLanguage(document.body.dataset.lang === 'ru' ? 'uk' : 'ru');
 });
 
+document.querySelectorAll('.photo-tile, .placeholder-tile').forEach(tile => {
+  const image = tile.querySelector('img');
+  if (!image || tile.querySelector('[data-lightbox-src]')) return;
+  const button = document.createElement('button');
+  button.className = 'photo-tile__zoom';
+  button.type = 'button';
+  button.dataset.lightboxSrc = image.getAttribute('src') || image.currentSrc || image.src;
+  button.setAttribute('aria-label', document.body.dataset.lang === 'ru' ? 'Увеличить фото' : 'Збільшити фото');
+  tile.append(button);
+});
+
 const setupLoopedCarousel = (carousel) => {
   const grid = carousel.querySelector('.photo-grid');
   const prev = carousel.querySelector('.photo-carousel__arrow--prev');
@@ -160,6 +171,99 @@ const setupLoopedCarousel = (carousel) => {
 };
 
 document.querySelectorAll('.photo-carousel').forEach(setupLoopedCarousel);
+
+const lightboxTriggers = document.querySelectorAll('[data-lightbox-src]');
+if (lightboxTriggers.length) {
+  const lightbox = document.createElement('div');
+  lightbox.className = 'lightbox';
+  lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('aria-modal', 'true');
+  lightbox.innerHTML = '<button class="lightbox__close" type="button" aria-label="Закрыть">×</button><button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Предыдущее фото">&lt;</button><img alt=""><button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Следующее фото">&gt;</button>';
+  document.body.append(lightbox);
+
+  const lightboxImage = lightbox.querySelector('img');
+  const lightboxClose = lightbox.querySelector('.lightbox__close');
+  const lightboxPrev = lightbox.querySelector('.lightbox__nav--prev');
+  const lightboxNext = lightbox.querySelector('.lightbox__nav--next');
+  let activeTriggers = [];
+  let activeIndex = 0;
+
+  const updateLightboxNav = () => {
+    if (!lightbox.classList.contains('is-open')) return;
+    const rect = lightboxImage.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const navGap = 8;
+    const navWidth = lightboxPrev.getBoundingClientRect().width || 44;
+    const offset = navWidth + navGap;
+    lightbox.style.setProperty('--lightbox-nav-left', `${Math.max(10, rect.left - offset)}px`);
+    lightbox.style.setProperty('--lightbox-nav-right', `${Math.max(10, window.innerWidth - rect.right - offset)}px`);
+  };
+
+  const setLightboxImage = index => {
+    if (!activeTriggers.length) return;
+    activeIndex = (index + activeTriggers.length) % activeTriggers.length;
+    const trigger = activeTriggers[activeIndex];
+    const image = trigger.querySelector('img');
+    const tile = trigger.closest('.photo-tile, .placeholder-tile');
+    const tileImage = tile ? tile.querySelector('img') : null;
+    lightboxImage.src = trigger.dataset.lightboxSrc;
+    lightboxImage.alt = image ? image.alt : tileImage ? tileImage.alt : '';
+    if (lightboxImage.complete) requestAnimationFrame(updateLightboxNav);
+  };
+
+  const moveLightbox = direction => {
+    setLightboxImage(activeIndex + direction);
+  };
+
+  const openLightbox = trigger => {
+    const gallery = trigger.closest('.photo-carousel, .tile-grid, .tile-gallery, .section') || document;
+    activeTriggers = [...gallery.querySelectorAll('[data-lightbox-src]')].filter(item => !item.closest('[data-loop-clone]'));
+    const directIndex = activeTriggers.indexOf(trigger);
+    const startIndex = directIndex >= 0 ? directIndex : activeTriggers.findIndex(item => item.dataset.lightboxSrc === trigger.dataset.lightboxSrc);
+    setLightboxImage(Math.max(0, startIndex));
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    lightboxClose.focus();
+    requestAnimationFrame(updateLightboxNav);
+  };
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-open');
+    lightboxImage.removeAttribute('src');
+    document.body.style.overflow = '';
+  };
+
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-lightbox-src]');
+    if (!trigger) return;
+    event.preventDefault();
+    event.stopPropagation();
+    openLightbox(trigger);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    const trigger = event.target.closest('[data-lightbox-src]');
+    if (!trigger) return;
+    event.preventDefault();
+    openLightbox(trigger);
+  });
+
+  lightboxImage.addEventListener('load', updateLightboxNav);
+  window.addEventListener('resize', updateLightboxNav, { passive: true });
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', () => moveLightbox(-1));
+  lightboxNext.addEventListener('click', () => moveLightbox(1));
+  lightbox.addEventListener('click', event => {
+    if (event.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', event => {
+    if (!lightbox.classList.contains('is-open')) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') moveLightbox(-1);
+    if (event.key === 'ArrowRight') moveLightbox(1);
+  });
+}
 
 const evrikaPlayer = document.getElementById('evrika-player');
 

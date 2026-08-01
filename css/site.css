@@ -845,7 +845,7 @@ input:focus,textarea:focus{
 .photo-tile__zoom{appearance:none;position:absolute;right:18px;bottom:18px;z-index:4;width:52px;height:52px;padding:0;border:1px solid rgba(255,255,255,.86);border-radius:50%;background:rgba(255,255,255,.82);box-shadow:0 14px 34px rgba(3,31,28,.24),inset 0 1px 0 #fff;backdrop-filter:blur(10px);opacity:0;pointer-events:none;transform:translateY(10px) scale(.92);transition:opacity .22s ease,transform .22s ease,background .2s ease;cursor:zoom-in}
 .photo-tile__zoom::before{content:"";position:absolute;left:15px;top:14px;width:17px;height:17px;border:3px solid #06443c;border-radius:50%;box-sizing:border-box}
 .photo-tile__zoom::after{content:"";position:absolute;left:31px;top:31px;width:13px;height:3px;border-radius:3px;background:#06443c;transform:rotate(45deg);transform-origin:left center}
-.photo-tile:hover .photo-tile__zoom,.photo-tile:focus-within .photo-tile__zoom{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
+.photo-tile:hover .photo-tile__zoom,.photo-tile:focus-within .photo-tile__zoom,.placeholder-tile:hover .photo-tile__zoom,.placeholder-tile:focus-within .photo-tile__zoom{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
 .photo-tile__zoom:hover,.photo-tile__zoom:focus-visible{background:#fff;outline:0;transform:translateY(0) scale(1.07)}
 .photo-carousel__arrow{position:absolute;top:50%;z-index:3;width:54px;height:54px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.92);border-radius:50%;background:rgba(255,255,255,.78);color:var(--ink);box-shadow:0 14px 34px rgba(9,73,64,.18),inset 0 1px 0 #fff;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);cursor:pointer;font-size:22px;transform:translateY(-50%);transition:transform .2s,background .2s}
 .photo-carousel__arrow:hover{background:#fff;transform:translateY(-50%) scale(1.06)}
@@ -974,7 +974,12 @@ input:focus,textarea:focus{
 .lightbox{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:28px;background:rgba(3,31,28,.78);backdrop-filter:blur(10px)}
 .lightbox.is-open{display:flex}
 .lightbox img{max-width:min(1100px,96vw);max-height:88vh;border-radius:20px;box-shadow:0 30px 90px rgba(0,0,0,.38)}
-.lightbox button{position:absolute;right:24px;top:24px;width:46px;height:46px;border:1px solid rgba(255,255,255,.48);border-radius:50%;background:rgba(255,255,255,.16);color:#fff;font-size:30px;line-height:1;cursor:pointer}
+.lightbox button{position:absolute;width:46px;height:46px;border:1px solid rgba(255,255,255,.48);border-radius:50%;background:rgba(255,255,255,.16);color:#fff;font-size:30px;line-height:1;cursor:pointer}
+.lightbox__close{right:24px;top:24px}
+.lightbox .lightbox__nav{top:50%;width:44px;height:72px;display:grid;place-items:center;padding:0;border:0;border-radius:0;background:transparent;color:rgba(111,222,154,.58);font-family:Arial,sans-serif;font-size:74px;font-weight:300;line-height:1;text-align:center;text-shadow:0 0 8px rgba(107,255,177,.36),0 8px 14px rgba(0,26,21,.3);transform:translateY(-50%) scaleY(1.65);transition:color .2s,text-shadow .2s,transform .2s}
+.lightbox__nav--prev{left:var(--lightbox-nav-left,18px)}
+.lightbox__nav--next{right:var(--lightbox-nav-right,18px)}
+.lightbox .lightbox__nav:hover{background:transparent;color:rgba(139,255,188,.76);text-shadow:0 0 12px rgba(128,255,186,.55),0 10px 16px rgba(0,26,21,.36);transform:translateY(-50%) scaleX(1.05) scaleY(1.74)}
 @media(max-width:900px){
   .choice-grid,.story-split__grid,.story-split--reverse .story-split__grid,.learn-more__grid{grid-template-columns:1fr}
   .choice-card{grid-template-columns:1fr 180px}
@@ -984,6 +989,8 @@ input:focus,textarea:focus{
   .photo-grid--vertical .photo-tile,.photo-grid--vertical .photo-tile--wide{flex-basis:clamp(230px,42vw,320px);height:460px}
   .photo-carousel__arrow--prev{left:4px}
   .photo-carousel__arrow--next{right:4px}
+  .lightbox{padding:20px 64px}
+  .lightbox .lightbox__nav{width:34px;height:58px;font-size:58px}
   .graduates__head{align-items:flex-start}
   .graduates-post{flex-basis:min(420px,78vw)}
 }

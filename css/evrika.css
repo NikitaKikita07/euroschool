@@ -29,7 +29,7 @@ body.evrika-page{background:#fcfdfc}
 .learning-bg__inner{position:relative;z-index:1;max-width:980px;text-align:center}
 .learning-bg__inner p{margin:0 auto 24px;color:var(--ink);font-size:clamp(22px,2.6vw,34px);line-height:1.34;font-weight:600;letter-spacing:-.03em}
 .placeholder-carousel{background:#fcfdfc}
-.placeholder-tile{height:310px;display:grid;place-items:center;flex:0 0 360px;overflow:hidden;border:1px solid rgba(8,121,111,.12);border-radius:24px;background:linear-gradient(135deg,#eef7f4,#fff);box-shadow:0 18px 48px rgba(9,73,64,.1);color:rgba(20,70,61,.44);font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+.placeholder-tile{position:relative;height:310px;display:grid;place-items:center;flex:0 0 360px;overflow:hidden;border:1px solid rgba(8,121,111,.12);border-radius:24px;background:linear-gradient(135deg,#eef7f4,#fff);box-shadow:0 18px 48px rgba(9,73,64,.1);color:rgba(20,70,61,.44);font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
 .placeholder-tile img{width:100%;height:100%;object-fit:cover}
 .evrika-page .photo-gallery--after-tuition{padding-top:28px;padding-bottom:34px}
 .evrika-page .photo-gallery--after-tuition .section-head{min-height:250px;margin-bottom:8px}
