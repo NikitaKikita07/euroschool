@@ -841,10 +841,11 @@ input:focus,textarea:focus{
 .photo-carousel--vertical{margin-top:22px}
 .photo-grid--vertical .photo-tile,.photo-grid--vertical .photo-tile--wide{flex-basis:clamp(230px,24vw,330px);height:clamp(360px,42vw,520px)}
 .photo-tile img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.75,.2,1)}
+.photo-tile--top img,.photo-tile img.photo-align-top{object-position:center top}
 .photo-tile:hover img{transform:scale(1.045)}
-.photo-tile__zoom{appearance:none;position:absolute;right:18px;bottom:18px;z-index:4;width:52px;height:52px;padding:0;border:1px solid rgba(255,255,255,.86);border-radius:50%;background:rgba(255,255,255,.82);box-shadow:0 14px 34px rgba(3,31,28,.24),inset 0 1px 0 #fff;backdrop-filter:blur(10px);opacity:0;pointer-events:none;transform:translateY(10px) scale(.92);transition:opacity .22s ease,transform .22s ease,background .2s ease;cursor:zoom-in}
-.photo-tile__zoom::before{content:"";position:absolute;left:15px;top:14px;width:17px;height:17px;border:3px solid #06443c;border-radius:50%;box-sizing:border-box}
-.photo-tile__zoom::after{content:"";position:absolute;left:31px;top:31px;width:13px;height:3px;border-radius:3px;background:#06443c;transform:rotate(45deg);transform-origin:left center}
+.photo-tile__zoom{appearance:none;position:absolute;right:18px;bottom:18px;z-index:4;width:52px;height:52px;padding:0;border:1px solid rgba(255,255,255,.86);border-radius:50%;background:rgba(255,255,255,.82);box-shadow:0 14px 34px rgba(3,31,28,.24),inset 0 1px 0 #fff;backdrop-filter:blur(10px);color:#06443c;opacity:0;pointer-events:none;transform:translateY(10px) scale(.92);transition:opacity .22s ease,transform .22s ease,background .2s ease,color .2s ease;cursor:zoom-in}
+.photo-tile__zoom::before{content:"";position:absolute;left:50%;top:50%;width:25px;height:25px;background:currentColor;transform:translate(-50%,-50%);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='m15.2 15.2 5 5'/%3E%3Cpath d='M10.5 7.6v5.8M7.6 10.5h5.8'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='m15.2 15.2 5 5'/%3E%3Cpath d='M10.5 7.6v5.8M7.6 10.5h5.8'/%3E%3C/svg%3E") center/contain no-repeat}
+.photo-tile__zoom::after{content:none}
 .photo-tile:hover .photo-tile__zoom,.photo-tile:focus-within .photo-tile__zoom,.placeholder-tile:hover .photo-tile__zoom,.placeholder-tile:focus-within .photo-tile__zoom{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
 .photo-tile__zoom:hover,.photo-tile__zoom:focus-visible{background:#fff;outline:0;transform:translateY(0) scale(1.07)}
 .photo-carousel__arrow{position:absolute;top:50%;z-index:3;width:54px;height:54px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.92);border-radius:50%;background:rgba(255,255,255,.78);color:var(--ink);box-shadow:0 14px 34px rgba(9,73,64,.18),inset 0 1px 0 #fff;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);cursor:pointer;font-size:22px;transform:translateY(-50%);transition:transform .2s,background .2s}
@@ -922,6 +923,25 @@ input:focus,textarea:focus{
 .graduates-post{flex:0 0 clamp(330px,34vw,470px);min-height:620px;display:flex;align-items:flex-start;justify-content:center;scroll-snap-align:start;padding:10px;border:1px solid rgba(255,255,255,.28);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.1));-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .graduates-post .instagram-media{width:100%!important;min-width:0!important;max-width:100%!important;margin:0!important;background:#fff!important;border-radius:18px!important}
 .graduates-post iframe{max-width:100%!important;margin:0!important}
+.graduates-icon-set{position:absolute;width:0;height:0;overflow:hidden}
+.graduates-post--local{align-items:flex-start}
+.graduates-insta-card{position:relative;width:100%;display:flex;flex-direction:column;overflow:hidden;border:1px solid #dbdbdb;border-radius:18px;background:#fff;color:#262626;box-shadow:0 18px 45px rgba(0,35,31,.1)}
+.graduates-insta-card__head{min-height:50px;display:flex;align-items:center;gap:8px;padding:10px 10px;border-bottom:1px solid #efefef}
+.graduates-insta-card__head::after{content:"Переглянути профіль";margin-left:auto;padding:9px 12px;border-radius:4px;font-size: 12px;background:#4b63f6;color:#fff;font-size:12px;font-weight:500;line-height:1}
+.graduates-insta-card__avatar{width:36px;height:36px;display:grid;place-items:center;flex:0 0 auto;border:1px solid #d93d82;border-radius:50%;background:#fff url("../images/school-logo.png") center/22px 22px no-repeat;color:transparent;font-size:0}
+.graduates-insta-card__head b{display:block;font-size:14px;line-height:1.1;color:#050505}
+.graduates-insta-card__head small{display:block;margin-top:2px;color:#262626;font-size:12px;line-height:1.1}
+.graduates-insta-card__media-track{height:555px;display:flex;flex:0 0 auto;gap:0;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scrollbar-width:none;background:#000}
+.graduates-insta-card__media-track::-webkit-scrollbar{display:none}
+.graduates-insta-card__media-track video{flex:0 0 100%;width:100%;height:555px;object-fit:contain;scroll-snap-align:start;background:#000}
+.graduates-insta-card__footer{background:#fff;color:#262626}
+.graduates-insta-card__more{display:block;padding:15px 12px;border-bottom:1px solid #dbdbdb;color:#3858e9;font-size:14px;font-weight:400;line-height:1}
+.graduates-insta-card__actions{height:38px;display:grid;grid-template-columns:29px 29px 29px 1fr 24px;align-items:center;padding:6px 10px 0;color:#262626}
+.graduates-insta-card__actions svg{width:24px;height:24px;display:block;fill:none;stroke:#262626;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.graduates-insta-card__actions svg:nth-child(4){grid-column:5;justify-self:end}
+.graduates-insta-card__likes{display:block;height:23px;padding:1px 10px 0;font-size:14px;font-weight:600;line-height:1.2;color:#050505}
+.graduates-insta-card__comment{height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;border-top:1px solid #dbdbdb;color:#8e8e8e;font-size:12px;line-height:1}
+.graduates-insta-card__comment svg{width:19px;height:19px;display:block;fill:none;stroke:#262626;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .graduates-carousel__arrow{width:54px;height:54px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.42);border-radius:50%;background:rgba(255,255,255,.18);color:#fff;box-shadow:0 14px 34px rgba(0,35,31,.18),inset 0 1px 0 rgba(255,255,255,.22);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);cursor:pointer;font-size:22px;pointer-events:auto;transition:transform .2s,background .2s}
 .graduates-carousel__arrow:hover{background:rgba(255,255,255,.28);transform:translateY(-2px)}
 .graduates-carousel__arrow:focus-visible{outline:3px solid rgba(255,255,255,.65);outline-offset:3px}
@@ -1003,6 +1023,12 @@ input:focus,textarea:focus{
   .main-idea__inner p,.main-idea__inner p:not(.lead){font-size:21px;line-height:1.22}
   .photo-grid{gap:14px;margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px}
   .photo-tile,.photo-tile--wide{flex-basis:82vw;height:260px}
+  .lightbox{padding:12px}
+  .lightbox img{display:block;width:auto;height:auto;max-width:calc(100vw - 24px);max-height:calc(100svh - 96px);object-fit:contain;border-radius:14px}
+  .lightbox__close{right:12px;top:12px}
+  .lightbox__nav--prev{left:8px}
+  .lightbox__nav--next{right:8px}
+  .lightbox .lightbox__nav{width:38px;height:64px;font-size:54px}
   .photo-grid--vertical .photo-tile,.photo-grid--vertical .photo-tile--wide{flex-basis:72vw;height:420px}
   .photo-carousel__arrow{width:46px;height:46px;font-size:19px}
   .story-split__media{height:310px;min-height:0;border-radius:24px}

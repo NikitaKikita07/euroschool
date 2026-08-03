@@ -345,7 +345,9 @@ document.querySelectorAll('.graduates-carousel').forEach(carousel => {
   const next = carousel.closest('.graduates')?.querySelector('.graduates-carousel__arrow--next');
   if (!track || !prev || !next) return;
 
-  const loop = setupSeamlessCarousel(track);
+  const loop = setupSeamlessCarousel(track, {
+    ignorePointerDown: event => event.target.closest('.graduates-insta-card__media-track, video, a')
+  });
   if (!loop) return;
 
   const moveGraduatesCarousel = direction => {

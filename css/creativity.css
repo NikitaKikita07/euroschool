@@ -88,7 +88,7 @@ body.creativity-page{background:#fcfdfc}
 .creative-section--projects .vertical-photo{flex:0 0 auto;width:auto;background:transparent;box-shadow:none}
 .vertical-photo img{width:100%;height:100%;object-fit:cover}
 .creative-section--projects .vertical-photo img{width:auto;height:100%;display:block;object-fit:contain;border-radius:24px;background:#fff;box-shadow:0 20px 48px rgba(0,35,31,.16)}
-.project-gallery:not([aria-labelledby="project-general-title"]) .vertical-photo img{cursor:zoom-in}
+.project-gallery .vertical-photo img{cursor:zoom-in}
 .project-lightbox{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:28px;background:rgba(4,22,19,.86);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
 .project-lightbox.is-open{opacity:1;visibility:visible}
 .project-lightbox img{max-width:min(1120px,92vw);max-height:88vh;border-radius:18px;background:#fff;box-shadow:0 28px 80px rgba(0,0,0,.36)}
@@ -131,8 +131,12 @@ body.creativity-page{background:#fcfdfc}
   .creative-feature{padding:16px;border-radius:22px}
   .creative-feature__media{height:250px;border-radius:18px}
   .creative-controls button{width:46px;height:46px}
-  .project-lightbox{padding:20px 64px}
+  .project-lightbox{padding:12px}
+  .project-lightbox img{display:block;width:auto;height:auto;max-width:calc(100vw - 24px);max-height:calc(100svh - 96px);object-fit:contain;border-radius:14px}
   .project-lightbox button{width:44px;height:44px}
+  .project-lightbox__close{right:12px;top:12px}
+  .project-lightbox__nav--prev{left:8px}
+  .project-lightbox__nav--next{right:8px}
   .project-lightbox .project-lightbox__nav{width:34px;height:58px;font-size:58px}
   .video-card h3{font-size:16px}
   .vertical-photo{flex-basis:78vw;height:420px}

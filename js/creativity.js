@@ -1,8 +1,9 @@
 document.querySelectorAll('[data-creative-gallery]').forEach(gallery => {
   const rows = [...gallery.querySelectorAll('.creative-row')];
   const section = gallery.closest('.project-gallery') || gallery.closest('.creative-section');
-  const prev = section?.querySelector('[data-row-prev]');
-  const next = section?.querySelector('[data-row-next]');
+  const controls = gallery.previousElementSibling?.querySelector('.creative-controls') || section?.querySelector('.creative-controls');
+  const prev = controls?.querySelector('[data-row-prev]');
+  const next = controls?.querySelector('[data-row-next]');
   if (!rows.length || !prev || !next) return;
 
   const slideStep = row => {
@@ -113,7 +114,7 @@ document.querySelectorAll('[data-creative-gallery]').forEach(gallery => {
   });
 });
 
-const projectImages = [...document.querySelectorAll('.project-gallery:not([aria-labelledby="project-general-title"]) .vertical-photo img')];
+const projectImages = [...document.querySelectorAll('.project-gallery .vertical-photo img')];
 if (projectImages.length) {
   const lightbox = document.createElement('div');
   lightbox.className = 'project-lightbox';
