@@ -760,7 +760,7 @@ input:focus,textarea:focus{
 
 .anchor-offset{display:block;position:relative;top:-110px;visibility:hidden}
 .school-choice{position:relative;background:#fcfdfc}
-.school-choice__head{min-height:clamp(260px,34vw,480px);align-items: flex-end;margin:0 0 55px;padding:40px 44px;border-radius:0 0 30px 30px;background-image:url("../images/domik.jpg");background-repeat:no-repeat;background-position:center top;background-size:cover}
+.school-choice__head{min-height:clamp(260px,34vw,480px);align-items: flex-end;margin:0 0 55px;padding:40px 44px;border-radius:0 0 30px 30px;background-image:url("../images/mainPage/domik_2_new.JPG");background-repeat:no-repeat;background-position:center top;background-size:cover}
 .school-choice__head .eyebrow{color:#071f1b}
 .choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;text-transform:uppercase}
 .choice-card{min-height:250px;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border:1px solid rgba(255,255,255,.92);border-radius:24px;background:linear-gradient(145deg,rgba(245,250,248,.82),rgba(255,255,255,.58));box-shadow:0 20px 55px rgba(13,75,67,.09),inset 0 1px 0 #fff}
@@ -799,7 +799,7 @@ input:focus,textarea:focus{
   display:block;
   width:100%;
   aspect-ratio:848/636;
-  background:url("../images/main-idea-title.jpg") center/contain no-repeat;
+  background:url("../images/mainPage/main-idea-title_new.JPG") center/contain no-repeat;
 }
 .main-idea__inner .eyebrow{
   margin-bottom: 20px;
