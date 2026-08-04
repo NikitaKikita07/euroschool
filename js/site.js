@@ -196,6 +196,66 @@ form?.addEventListener('submit', async event => {
 document.getElementById('year').textContent = new Date().getFullYear();
 
 const photoTracks = document.querySelectorAll('.photo-grid');
+
+const getGraduatesMediaTrackForArrow = button => {
+  if (button.classList.contains('graduates-insta-card__media-arrow--prev')) {
+    return button.previousElementSibling?.classList.contains('graduates-insta-card__media-track')
+      ? button.previousElementSibling
+      : null;
+  }
+  const track = button.previousElementSibling?.previousElementSibling;
+  return track?.classList.contains('graduates-insta-card__media-track') ? track : null;
+};
+
+const moveGraduatesOuterFromMedia = (track, direction) => {
+  const outerTrack = track.closest('.graduates-carousel')?.querySelector('.graduates-carousel__track');
+  if (outerTrack) {
+    const slide = outerTrack.querySelector(':scope > .graduates-post');
+    const gap = Number.parseFloat(getComputedStyle(outerTrack).columnGap || getComputedStyle(outerTrack).gap) || 0;
+    const step = (slide?.getBoundingClientRect().width || outerTrack.clientWidth * 0.85) + gap;
+    outerTrack.scrollLeft += direction * step;
+    return;
+  }
+  track.dispatchEvent(new CustomEvent('graduatesOuterMove', {
+    bubbles: true,
+    detail: { direction }
+  }));
+};
+
+const moveGraduatesMediaTrack = (track, direction) => {
+  const max = Math.max(0, track.scrollWidth - track.clientWidth);
+  const atStart = track.scrollLeft <= 2;
+  const atEnd = track.scrollLeft >= max - 2;
+  if ((direction < 0 && atStart) || (direction > 0 && atEnd)) {
+    moveGraduatesOuterFromMedia(track, direction);
+    return;
+  }
+  track.scrollLeft = Math.max(0, Math.min(max, track.scrollLeft + direction * track.clientWidth));
+};
+
+let lastGraduatesMediaArrowActivation = 0;
+let suppressGraduatesMediaArrowClick = false;
+const handleGraduatesMediaArrowActivation = event => {
+  const target = event.target instanceof Element ? event.target : event.target.parentElement;
+  const button = target?.closest('.graduates-insta-card__media-arrow');
+  if (!button) return;
+  if (event.type === 'click' && suppressGraduatesMediaArrowClick) {
+    event.preventDefault();
+    event.stopPropagation();
+    suppressGraduatesMediaArrowClick = false;
+    return;
+  }
+  const track = getGraduatesMediaTrackForArrow(button);
+  if (!track) return;
+  event.preventDefault();
+  event.stopPropagation();
+  lastGraduatesMediaArrowActivation = Date.now();
+  suppressGraduatesMediaArrowClick = event.type === 'pointerdown';
+  moveGraduatesMediaTrack(track, button.classList.contains('graduates-insta-card__media-arrow--next') ? 1 : -1);
+};
+
+document.addEventListener('pointerdown', handleGraduatesMediaArrowActivation, true);
+document.addEventListener('click', handleGraduatesMediaArrowActivation, true);
 let openLightbox = null;
 
 document.querySelectorAll('.photo-tile, .placeholder-tile').forEach(tile => {
@@ -346,7 +406,7 @@ document.querySelectorAll('.graduates-carousel').forEach(carousel => {
   if (!track || !prev || !next) return;
 
   const loop = setupSeamlessCarousel(track, {
-    ignorePointerDown: event => event.target.closest('.graduates-insta-card__media-track, video, a')
+    ignorePointerDown: event => event.target.closest('.graduates-insta-card__media-track, .graduates-insta-card__media-track img, a')
   });
   if (!loop) return;
 
@@ -354,8 +414,125 @@ document.querySelectorAll('.graduates-carousel').forEach(carousel => {
     loop.move(direction);
   };
 
+  carousel.addEventListener('graduatesOuterMove', event => {
+    moveGraduatesCarousel(event.detail?.direction || 1);
+  });
+
   prev.addEventListener('click', () => moveGraduatesCarousel(-1));
   next.addEventListener('click', () => moveGraduatesCarousel(1));
+});
+
+document.querySelectorAll('.graduates-insta-card__media-track').forEach(track => {
+  if (track.children.length < 2) return;
+
+  const prevButton = document.createElement('button');
+  const nextButton = document.createElement('button');
+  prevButton.className = 'graduates-insta-card__media-arrow graduates-insta-card__media-arrow--prev';
+  nextButton.className = 'graduates-insta-card__media-arrow graduates-insta-card__media-arrow--next';
+  prevButton.type = 'button';
+  nextButton.type = 'button';
+  prevButton.setAttribute('aria-label', 'Попереднє фото');
+  nextButton.setAttribute('aria-label', 'Наступне фото');
+  prevButton.textContent = '‹';
+  nextButton.textContent = '›';
+  track.after(prevButton, nextButton);
+
+  let dragging = false;
+  let startX = 0;
+  let startScroll = 0;
+  let moved = false;
+  let edgeDirection = 0;
+
+  const snapToClosest = () => {
+    const width = track.clientWidth;
+    if (!width) return;
+    track.scrollLeft = Math.round(track.scrollLeft / width) * width;
+  };
+
+  const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
+  const atStart = () => track.scrollLeft <= 2;
+  const atEnd = () => track.scrollLeft >= maxScroll() - 2;
+  const moveOuter = direction => {
+    track.dispatchEvent(new CustomEvent('graduatesOuterMove', {
+      bubbles: true,
+      detail: { direction }
+    }));
+  };
+  const moveInnerOrOuter = direction => {
+    const target = track.scrollLeft + direction * track.clientWidth;
+    if ((direction < 0 && atStart()) || (direction > 0 && atEnd())) {
+      moveOuter(direction);
+      return;
+    }
+    track.scrollLeft = Math.max(0, Math.min(maxScroll(), target));
+  };
+  const updateButtons = () => {
+    prevButton.classList.toggle('is-at-edge', atStart());
+    nextButton.classList.toggle('is-at-edge', atEnd());
+  };
+
+  track.addEventListener('pointerdown', event => {
+    if (event.pointerType === 'touch') return;
+    dragging = true;
+    moved = false;
+    edgeDirection = 0;
+    startX = event.clientX;
+    startScroll = track.scrollLeft;
+    track.classList.add('is-dragging');
+    track.setPointerCapture(event.pointerId);
+  });
+
+  track.addEventListener('pointermove', event => {
+    if (!dragging) return;
+    const distance = event.clientX - startX;
+    if (Math.abs(distance) > 6) moved = true;
+    if ((startScroll <= 2 && distance > 18) || (startScroll >= maxScroll() - 2 && distance < -18)) {
+      edgeDirection = distance < 0 ? 1 : -1;
+      return;
+    }
+    track.scrollLeft = startScroll - distance;
+  });
+
+  const stopDrag = event => {
+    if (!dragging) return;
+    dragging = false;
+    track.classList.remove('is-dragging');
+    if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+    if (edgeDirection) {
+      moveOuter(edgeDirection);
+    } else {
+      snapToClosest();
+    }
+    setTimeout(() => { moved = false; }, 0);
+    edgeDirection = 0;
+  };
+
+  track.addEventListener('pointerup', stopDrag);
+  track.addEventListener('pointercancel', stopDrag);
+  track.addEventListener('scroll', updateButtons, { passive: true });
+  prevButton.addEventListener('click', event => {
+    event.stopPropagation();
+    moveInnerOrOuter(-1);
+  });
+  nextButton.addEventListener('click', event => {
+    event.stopPropagation();
+    moveInnerOrOuter(1);
+  });
+  track.addEventListener('wheel', event => {
+    const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY);
+    if (!horizontal) return;
+    const direction = event.deltaX > 0 ? 1 : -1;
+    if ((direction < 0 && atStart()) || (direction > 0 && atEnd())) {
+      event.preventDefault();
+      moveOuter(direction);
+    }
+  }, { passive: false });
+  track.addEventListener('click', event => {
+    if (!moved) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, true);
+  updateButtons();
 });
 
 const lightboxTriggers = document.querySelectorAll('[data-lightbox-src]');

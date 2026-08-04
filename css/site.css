@@ -911,16 +911,16 @@ input:focus,textarea:focus{
 .learn-card:nth-child(2){background:linear-gradient(145deg,rgba(255,244,221,.84),rgba(255,255,255,.44))}
 .learn-card:nth-child(3){background:linear-gradient(145deg,rgba(223,241,245,.86),rgba(255,255,255,.44))}
 .learn-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(10,64,56,.13),inset 0 1px 0 #fff}
-.graduates{position:relative;overflow:hidden;color:#fff;background:radial-gradient(circle at 10% 12%,rgba(117,255,231,.22),transparent 28%),radial-gradient(circle at 92% 88%,rgba(178,255,241,.18),transparent 26%),#138c7d}
+.graduates{position:relative;overflow:hidden;padding-bottom:16px;color:#fff;background:radial-gradient(circle at 10% 12%,rgba(117,255,231,.22),transparent 28%),radial-gradient(circle at 92% 88%,rgba(178,255,241,.18),transparent 26%),#138c7d}
 .graduates__head{align-items:flex-end}
 .graduates__head h2{color:#fff}
 .graduates__controls{position:absolute;inset:50% -18px auto;z-index:4;display:flex;justify-content:space-between;pointer-events:none;transform:translateY(-50%)}
 .graduates-carousel{position:relative}
-.graduates-carousel__track{display:flex;gap:12px;overflow-x:auto;overscroll-behavior-inline:contain;overflow-y: hidden;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0px 8px 6px 30px;cursor:grab;user-select:none;-webkit-user-select:none}
+.graduates-carousel__track{display:flex;align-items:flex-start;gap:12px;overflow-x:auto;overscroll-behavior-inline:contain;overflow-y: hidden;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0px 8px 2px 30px;cursor:grab;user-select:none;-webkit-user-select:none}
 .graduates-carousel__track::-webkit-scrollbar{display:none}
 .graduates-carousel__track.is-dragging{cursor:grabbing;scroll-snap-type:none}
 .graduates-carousel__track.is-dragging *{pointer-events:none}
-.graduates-post{flex:0 0 clamp(330px,34vw,470px);min-height:620px;display:flex;align-items:flex-start;justify-content:center;scroll-snap-align:start;padding:10px;border:1px solid rgba(255,255,255,.28);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.1));-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.graduates-post{flex:0 0 clamp(330px,34vw,470px);display:flex;align-items:flex-start;justify-content:center;scroll-snap-align:start;padding:10px;border:1px solid rgba(255,255,255,.28);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.1));-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .graduates-post .instagram-media{width:100%!important;min-width:0!important;max-width:100%!important;margin:0!important;background:#fff!important;border-radius:18px!important}
 .graduates-post iframe{max-width:100%!important;margin:0!important}
 .graduates-icon-set{position:absolute;width:0;height:0;overflow:hidden}
@@ -928,23 +928,29 @@ input:focus,textarea:focus{
 .graduates-insta-card{position:relative;width:100%;display:flex;flex-direction:column;overflow:hidden;border:1px solid #dbdbdb;border-radius:18px;background:#fff;color:#262626;box-shadow:0 18px 45px rgba(0,35,31,.1)}
 .graduates-insta-card__head{min-height:50px;display:flex;align-items:center;gap:8px;padding:10px 10px;border-bottom:1px solid #efefef}
 .graduates-insta-card__head::after{content:"Переглянути профіль";margin-left:auto;padding:9px 12px;border-radius:4px;font-size: 12px;background:#4b63f6;color:#fff;font-size:12px;font-weight:500;line-height:1}
-.graduates-insta-card__avatar{width:36px;height:36px;display:grid;place-items:center;flex:0 0 auto;border:1px solid #d93d82;border-radius:50%;background:#fff url("../images/school-logo.png") center/22px 22px no-repeat;color:transparent;font-size:0}
+.graduates-insta-card__avatar{width:36px;height:36px;display:grid;place-items:center;flex:0 0 auto;border:1px solid #d93d82;border-radius:50%;background:#fff url("../images/icon.png") center/34px 34px no-repeat;color:transparent;font-size:0}
 .graduates-insta-card__head b{display:block;font-size:14px;line-height:1.1;color:#050505}
 .graduates-insta-card__head small{display:block;margin-top:2px;color:#262626;font-size:12px;line-height:1.1}
-.graduates-insta-card__media-track{height:555px;display:flex;flex:0 0 auto;gap:0;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scrollbar-width:none;background:#000}
+.graduates-insta-card__media-track{height:555px;display:flex;flex:0 0 auto;gap:0;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scrollbar-width:none;background:#000;touch-action:pan-x;-webkit-overflow-scrolling:touch}
 .graduates-insta-card__media-track::-webkit-scrollbar{display:none}
-.graduates-insta-card__media-track video{flex:0 0 100%;width:100%;height:555px;object-fit:contain;scroll-snap-align:start;background:#000}
+.graduates-insta-card__media-track.is-dragging{cursor:grabbing;scroll-snap-type:none}
+.graduates-insta-card__media-track img{flex:0 0 100%;width:100%;height:555px;object-fit:contain;scroll-snap-align:start;background:#000;user-select:none;-webkit-user-drag:none}
+.graduates-insta-card__media-arrow{position:absolute;top:327px;z-index:3;width:30px;height:30px;display:none;place-items:center;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.86);color:#654ad7;box-shadow:0 8px 20px rgba(0,0,0,.24);font-size:27px;font-weight:700;line-height:1;cursor:pointer;opacity:.94;transform:translateY(-50%);transition:opacity .2s,transform .2s,background .2s,color .2s}
+.graduates-insta-card__media-arrow--prev{left:13px}
+.graduates-insta-card__media-arrow--next{right:13px}
+.graduates-insta-card:hover .graduates-insta-card__media-arrow,.graduates-insta-card:focus-within .graduates-insta-card__media-arrow{opacity:1;transform:translateY(-50%) scale(1.04)}
+.graduates-insta-card__media-arrow:hover{background:#fff;color:#3858e9}
+.graduates-insta-card__media-arrow.is-at-edge{color:#3858e9}
+.graduates-insta-card__media-arrow:focus-visible{outline:3px solid rgba(56,88,233,.35);outline-offset:2px}
 .graduates-insta-card__footer{background:#fff;color:#262626}
-.graduates-insta-card__more{display:block;padding:15px 12px;border-bottom:1px solid #dbdbdb;color:#3858e9;font-size:14px;font-weight:400;line-height:1}
-.graduates-insta-card__actions{height:38px;display:grid;grid-template-columns:29px 29px 29px 1fr 24px;align-items:center;padding:6px 10px 0;color:#262626}
-.graduates-insta-card__actions svg{width:24px;height:24px;display:block;fill:none;stroke:#262626;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
-.graduates-insta-card__actions svg:nth-child(4){grid-column:5;justify-self:end}
-.graduates-insta-card__likes{display:block;height:23px;padding:1px 10px 0;font-size:14px;font-weight:600;line-height:1.2;color:#050505}
-.graduates-insta-card__comment{height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;border-top:1px solid #dbdbdb;color:#8e8e8e;font-size:12px;line-height:1}
-.graduates-insta-card__comment svg{width:19px;height:19px;display:block;fill:none;stroke:#262626;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.graduates-insta-card__more{display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 12px;color:#3858e9;font-size:14px;font-weight:400;line-height:1}
+.graduates-insta-card__more svg{width:18px;height:18px;display:block;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .graduates-carousel__arrow{width:54px;height:54px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.42);border-radius:50%;background:rgba(255,255,255,.18);color:#fff;box-shadow:0 14px 34px rgba(0,35,31,.18),inset 0 1px 0 rgba(255,255,255,.22);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);cursor:pointer;font-size:22px;pointer-events:auto;transition:transform .2s,background .2s}
 .graduates-carousel__arrow:hover{background:rgba(255,255,255,.28);transform:translateY(-2px)}
 .graduates-carousel__arrow:focus-visible{outline:3px solid rgba(255,255,255,.65);outline-offset:3px}
+@media(hover:hover) and (pointer:fine){
+  .graduates-insta-card__media-arrow{display:grid}
+}
 .choice-card,.story-split__media,.route__map,.contact-form,.faq__item,.video-showcase__stage{
   transition:
     transform .35s cubic-bezier(.2,.75,.2,1),
@@ -1046,7 +1052,7 @@ input:focus,textarea:focus{
   .graduates__head{gap:24px;margin-bottom:30px}
   .graduates__controls{left:4px;right:4px;width:auto;justify-content:space-between}
   .graduates-carousel__track{gap:14px;margin-left:0;margin-right:0;padding-left:6px;padding-right:18px}
-  .graduates-post{flex-basis:84vw;min-height:560px;padding:12px;border-radius:20px}
+  .graduates-post{flex-basis:84vw;padding:12px;border-radius:20px}
   .graduates-carousel__arrow{width:46px;height:46px;font-size:19px}
 }
 
