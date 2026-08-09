@@ -207,30 +207,25 @@ const getGraduatesMediaTrackForArrow = button => {
   return track?.classList.contains('graduates-insta-card__media-track') ? track : null;
 };
 
-const moveGraduatesOuterFromMedia = (track, direction) => {
-  const outerTrack = track.closest('.graduates-carousel')?.querySelector('.graduates-carousel__track');
-  if (outerTrack) {
-    const slide = outerTrack.querySelector(':scope > .graduates-post');
-    const gap = Number.parseFloat(getComputedStyle(outerTrack).columnGap || getComputedStyle(outerTrack).gap) || 0;
-    const step = (slide?.getBoundingClientRect().width || outerTrack.clientWidth * 0.85) + gap;
-    outerTrack.scrollLeft += direction * step;
-    return;
-  }
-  track.dispatchEvent(new CustomEvent('graduatesOuterMove', {
-    bubbles: true,
-    detail: { direction }
-  }));
-};
+const graduatesMediaLoops = new WeakMap();
 
 const moveGraduatesMediaTrack = (track, direction) => {
+  const loop = graduatesMediaLoops.get(track);
+  if (loop) {
+    loop.normalize();
+    loop.move(direction);
+    return;
+  }
+
   const max = Math.max(0, track.scrollWidth - track.clientWidth);
   const atStart = track.scrollLeft <= 2;
   const atEnd = track.scrollLeft >= max - 2;
-  if ((direction < 0 && atStart) || (direction > 0 && atEnd)) {
-    moveGraduatesOuterFromMedia(track, direction);
-    return;
-  }
-  track.scrollLeft = Math.max(0, Math.min(max, track.scrollLeft + direction * track.clientWidth));
+  const target = direction < 0 && atStart
+    ? max
+    : direction > 0 && atEnd
+      ? 0
+      : Math.max(0, Math.min(max, track.scrollLeft + direction * track.clientWidth));
+  track.scrollTo({ left: target, behavior: 'smooth' });
 };
 
 let lastGraduatesMediaArrowActivation = 0;
@@ -437,102 +432,11 @@ document.querySelectorAll('.graduates-insta-card__media-track').forEach(track =>
   nextButton.textContent = '›';
   track.after(prevButton, nextButton);
 
-  let dragging = false;
-  let startX = 0;
-  let startScroll = 0;
-  let moved = false;
-  let edgeDirection = 0;
-
-  const snapToClosest = () => {
-    const width = track.clientWidth;
-    if (!width) return;
-    track.scrollLeft = Math.round(track.scrollLeft / width) * width;
-  };
-
-  const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
-  const atStart = () => track.scrollLeft <= 2;
-  const atEnd = () => track.scrollLeft >= maxScroll() - 2;
-  const moveOuter = direction => {
-    track.dispatchEvent(new CustomEvent('graduatesOuterMove', {
-      bubbles: true,
-      detail: { direction }
-    }));
-  };
-  const moveInnerOrOuter = direction => {
-    const target = track.scrollLeft + direction * track.clientWidth;
-    if ((direction < 0 && atStart()) || (direction > 0 && atEnd())) {
-      moveOuter(direction);
-      return;
-    }
-    track.scrollLeft = Math.max(0, Math.min(maxScroll(), target));
-  };
-  const updateButtons = () => {
-    prevButton.classList.toggle('is-at-edge', atStart());
-    nextButton.classList.toggle('is-at-edge', atEnd());
-  };
-
-  track.addEventListener('pointerdown', event => {
-    if (event.pointerType === 'touch') return;
-    dragging = true;
-    moved = false;
-    edgeDirection = 0;
-    startX = event.clientX;
-    startScroll = track.scrollLeft;
-    track.classList.add('is-dragging');
-    track.setPointerCapture(event.pointerId);
+  const loop = setupSeamlessCarousel(track, {
+    step: () => track.clientWidth,
+    ignorePointerDown: event => event.target.closest('a, button')
   });
-
-  track.addEventListener('pointermove', event => {
-    if (!dragging) return;
-    const distance = event.clientX - startX;
-    if (Math.abs(distance) > 6) moved = true;
-    if ((startScroll <= 2 && distance > 18) || (startScroll >= maxScroll() - 2 && distance < -18)) {
-      edgeDirection = distance < 0 ? 1 : -1;
-      return;
-    }
-    track.scrollLeft = startScroll - distance;
-  });
-
-  const stopDrag = event => {
-    if (!dragging) return;
-    dragging = false;
-    track.classList.remove('is-dragging');
-    if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
-    if (edgeDirection) {
-      moveOuter(edgeDirection);
-    } else {
-      snapToClosest();
-    }
-    setTimeout(() => { moved = false; }, 0);
-    edgeDirection = 0;
-  };
-
-  track.addEventListener('pointerup', stopDrag);
-  track.addEventListener('pointercancel', stopDrag);
-  track.addEventListener('scroll', updateButtons, { passive: true });
-  prevButton.addEventListener('click', event => {
-    event.stopPropagation();
-    moveInnerOrOuter(-1);
-  });
-  nextButton.addEventListener('click', event => {
-    event.stopPropagation();
-    moveInnerOrOuter(1);
-  });
-  track.addEventListener('wheel', event => {
-    const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY);
-    if (!horizontal) return;
-    const direction = event.deltaX > 0 ? 1 : -1;
-    if ((direction < 0 && atStart()) || (direction > 0 && atEnd())) {
-      event.preventDefault();
-      moveOuter(direction);
-    }
-  }, { passive: false });
-  track.addEventListener('click', event => {
-    if (!moved) return;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-  }, true);
-  updateButtons();
+  if (loop) graduatesMediaLoops.set(track, loop);
 });
 
 const lightboxTriggers = document.querySelectorAll('[data-lightbox-src]');

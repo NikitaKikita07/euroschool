@@ -60,8 +60,11 @@ body.creativity-page{background:#fcfdfc}
 .creative-section__head h2{margin-top:10px}
 .creative-section .container{position:relative}
 .creative-controls{position:absolute;inset:calc(50% + 44px) -18px auto;z-index:4;display:flex;justify-content:space-between;gap:10px;pointer-events:none;transform:translateY(-50%)}
-.creative-controls button{width:52px;height:52px;display:grid;place-items:center;border:1px solid rgba(8,121,111,.22);border-radius:50%;background:#fff;color:var(--green);box-shadow:0 12px 28px rgba(8,78,68,.12);cursor:pointer;font-size:20px;transition:transform .2s,background .2s}
+.creative-controls button{position:relative;width:52px;height:52px;display:grid;place-items:center;border:1px solid rgba(8,121,111,.22);border-radius:50%;background:#fff;color:var(--green);box-shadow:0 12px 28px rgba(8,78,68,.12);cursor:pointer;font-size:0;line-height:1;transition:transform .2s,background .2s}
 .creative-controls button{pointer-events:auto}
+.creative-controls button::before{position:absolute;left:50%;top:50%;display:block;font-family:Arial,sans-serif;font-size:22px;font-weight:400;line-height:1;transform:translate(-50%,-50%)}
+.creative-controls button[data-row-prev]::before{content:"←"}
+.creative-controls button[data-row-next]::before{content:"→"}
 .creative-section--video .creative-controls button{border-color:rgba(255,255,255,.38);background:rgba(255,255,255,.17);color:#fff}
 .creative-controls button:hover{transform:translateY(-2px);background:var(--mint);color:#063f38}
 .project-galleries{display:grid;gap:42px}
@@ -74,6 +77,8 @@ body.creativity-page{background:#fcfdfc}
 .project-gallery:nth-child(odd) .creative-controls button{border-color:rgba(8,121,111,.22);background:#fff;color:var(--green)}
 .project-gallery:nth-child(even) .creative-controls button{border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.17);color:#fff}
 .project-gallery .creative-controls button:hover{background:var(--mint);color:#063f38}
+.project-gallery--instagram .creative-controls{inset:calc(50% + 34px) max(8px,calc((100vw - 1240px)/2)) auto}
+.project-gallery--instagram .creative-controls button{border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.17);color:#fff}
 .project-gallery--compact .vertical-photo{height:clamp(300px,34vw,440px)}
 .creative-rows{display:grid;gap:18px}
 .creative-row{display:flex;gap:18px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 6px 20px;cursor:grab}
