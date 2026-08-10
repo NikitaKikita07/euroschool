@@ -5,7 +5,8 @@
 
   const pageUrl = canonicalUrl.href;
   const siteUrl = new URL('./', pageUrl).href;
-  const imageUrl = new URL('images/school-logo.png', siteUrl).href;
+  const logoUrl = new URL('images/school-logo.png', siteUrl).href;
+  const imageUrl = new URL('images/search-preview.jpg', siteUrl).href;
 
   const setLink = (rel, href) => {
     let element = document.querySelector(`link[rel="${rel}"]`);
@@ -34,8 +35,10 @@
       element = document.createElement('meta');
       const property = selector.match(/property="([^"]+)"/)?.[1];
       const name = selector.match(/name="([^"]+)"/)?.[1];
+      const itemprop = selector.match(/itemprop="([^"]+)"/)?.[1];
       if (property) element.setAttribute('property', property);
       if (name) element.setAttribute('name', name);
+      if (itemprop) element.setAttribute('itemprop', itemprop);
       document.head.appendChild(element);
     }
     element.setAttribute(attribute, value);
@@ -45,9 +48,13 @@
   setAlternateLink('uk', pageUrl);
   setAlternateLink('ru', pageUrl);
   setAlternateLink('x-default', pageUrl);
+  setLink('image_src', imageUrl);
   setMeta('meta[property="og:url"]', 'content', pageUrl);
   setMeta('meta[property="og:image"]', 'content', imageUrl);
+  setMeta('meta[property="og:image:width"]', 'content', '478');
+  setMeta('meta[property="og:image:height"]', 'content', '478');
   setMeta('meta[name="twitter:image"]', 'content', imageUrl);
+  setMeta('meta[itemprop="image"]', 'content', imageUrl);
 
   const faq = [...document.querySelectorAll('.faq__item')].map(item => ({
     '@type': 'Question',
@@ -65,7 +72,7 @@
       name: 'Європейська гімназія',
       alternateName: 'Европейская гимназия',
       url: siteUrl,
-      logo: imageUrl,
+      logo: logoUrl,
       image: imageUrl,
       description: 'Приватна школа у Дніпрі з навчанням від дитячого садка до 11 класу.',
       telephone: '+380671757773',
@@ -105,6 +112,14 @@
       name: document.title,
       isPartOf: { '@id': `${siteUrl}#website` },
       about: { '@id': `${siteUrl}#school` },
+      image: imageUrl,
+      thumbnailUrl: imageUrl,
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: imageUrl,
+        width: 478,
+        height: 478
+      },
       inLanguage: document.documentElement.lang || document.body.dataset.lang || 'uk'
     }
   ];
