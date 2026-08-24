@@ -52,6 +52,7 @@ body[data-lang="uk"] [data-ru],body[data-lang="ru"] [data-uk]{display:none!impor
   .tile-grid .photo-tile,.tile-grid .photo-tile--wide{grid-column:auto;height:250px}
   .placeholder-tile{flex-basis:82vw;height:250px}
   .evrika-page .photo-gallery--after-tuition{padding-top:44px;padding-bottom:52px}
-  .evrika-page .photo-gallery--after-tuition .section-head{min-height:270px;margin-bottom:8px}
-  .evrika-owllike{top:34px;width:min(210px,58vw)}
+  .evrika-page .photo-gallery--after-tuition .section-head{min-height:0;gap:18px;margin-bottom:30px}
+  .evrika-page .photo-gallery--after-tuition .section-head>div{order:2;width:100%}
+  .evrika-owllike{position:relative;left:auto;top:auto;order:1;width:min(210px,58vw);margin:0 auto;transform:none}
 }

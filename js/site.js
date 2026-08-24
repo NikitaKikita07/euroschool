@@ -155,7 +155,7 @@ form?.addEventListener('submit', async event => {
     name.nextElementSibling.textContent = window.t('Укажите имя');
     valid = false;
   }
-  if (phone.value.replace(/\D/g, '').length < 10) {
+  if (phone.value.replace(/\D/g, '').length < 12) {
     phone.nextElementSibling.textContent = window.t('Укажите корректный номер телефона');
     valid = false;
   }

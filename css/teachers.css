@@ -71,8 +71,6 @@ body[data-lang="uk"] [data-ru],body[data-lang="ru"] [data-uk]{display:none!impor
 .teachers-video__inner{display:flex;justify-content:center}
 .teachers-video iframe{width:min(420px,88vw);aspect-ratio:9/16;border:1px solid rgba(255,255,255,.28);border-radius:30px;background:#123f38;box-shadow:0 28px 70px rgba(0,25,22,.28)}
 .teachers-page .contact{padding-top:92px;padding-bottom:92px;background:#f4f8f6}
-.teachers-page .contact__compact{grid-template-columns:minmax(260px,.78fr) minmax(420px,1fr)}
-.teachers-page .contact__actions{justify-self:end}
 .teachers-page .route{background:#fff}
 @media(max-width:900px){
   .teachers-intro{padding-top:122px}
@@ -115,7 +113,6 @@ body[data-lang="uk"] [data-ru],body[data-lang="ru"] [data-uk]{display:none!impor
   .stats-history__copy p{font-size:22px}
   .teachers-video{padding-bottom:72px}
   .teachers-video iframe{border-radius:24px}
-  .teachers-page .contact__actions{justify-self:center}
   .stats-image-lightbox{padding:12px}
   .stats-image-lightbox img{display:block;width:auto;height:auto;max-width:calc(100vw - 24px);max-height:calc(100svh - 96px);object-fit:contain}
   .stats-image-lightbox__close{right:12px;top:12px}
