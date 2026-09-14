@@ -4,6 +4,17 @@ const nav = document.querySelector('.nav');
 const langButton = document.querySelector('.lang-switch');
 const navDropdown = document.querySelector('.nav__dropdown');
 const navDropdownToggle = document.querySelector('.nav__dropdown-toggle');
+const navCollapse = document.querySelector('.nav__collapse');
+const mobileNavigation = matchMedia('(max-width: 1100px)');
+
+const setDropdownOpen = open => {
+  navDropdown?.classList.toggle('open', open);
+  navDropdownToggle?.setAttribute('aria-expanded', String(open));
+};
+
+const syncDefaultDropdownState = event => setDropdownOpen(event.matches);
+syncDefaultDropdownState(mobileNavigation);
+mobileNavigation.addEventListener('change', syncDefaultDropdownState);
 const titleByLanguage = {
   uk: 'Дитячий сад Еврика | Європейська гімназія Дніпро',
   ru: 'Детский сад Эврика | Европейская гимназия Днепр'
@@ -66,10 +77,12 @@ const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY >
 updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
 
-menuButton?.addEventListener('click', () => {
+menuButton?.addEventListener('click', event => {
+  event.stopPropagation();
   const expanded = menuButton.getAttribute('aria-expanded') === 'true';
   menuButton.setAttribute('aria-expanded', String(!expanded));
   header?.classList.toggle('open', !expanded);
+  if (expanded === false && mobileNavigation.matches) setDropdownOpen(true);
 });
 
 nav?.addEventListener('click', (event) => {
@@ -85,6 +98,13 @@ navDropdownToggle?.addEventListener('click', event => {
   event.stopPropagation();
   const open = navDropdown.classList.toggle('open');
   navDropdownToggle.setAttribute('aria-expanded', String(open));
+});
+
+navCollapse?.addEventListener('click', event => {
+  event.stopPropagation();
+  header?.classList.remove('open');
+  menuButton?.setAttribute('aria-expanded', 'false');
+  menuButton?.focus();
 });
 
 document.addEventListener('click', event => {

@@ -4,6 +4,17 @@ const nav = document.querySelector('.nav');
 const langButton = document.querySelector('.lang-switch');
 const navDropdown = document.querySelector('.nav__dropdown');
 const navDropdownToggle = document.querySelector('.nav__dropdown-toggle');
+const navCollapse = document.querySelector('.nav__collapse');
+const mobileNavigation = matchMedia('(max-width: 1100px)');
+
+const setDropdownOpen = open => {
+  navDropdown?.classList.toggle('open', open);
+  navDropdownToggle?.setAttribute('aria-expanded', String(open));
+};
+
+const syncDefaultDropdownState = event => setDropdownOpen(event.matches);
+syncDefaultDropdownState(mobileNavigation);
+mobileNavigation.addEventListener('change', syncDefaultDropdownState);
 
 const pageMeta = {
   ru: {
@@ -64,9 +75,11 @@ const syncHeader = () => header?.classList.toggle('scrolled', scrollY > 20);
 addEventListener('scroll', syncHeader, { passive: true });
 syncHeader();
 
-menuButton?.addEventListener('click', () => {
+menuButton?.addEventListener('click', event => {
+  event.stopPropagation();
   const open = header.classList.toggle('open');
   menuButton.setAttribute('aria-expanded', String(open));
+  if (open && mobileNavigation.matches) setDropdownOpen(true);
 });
 
 nav?.addEventListener('click', event => {
@@ -81,6 +94,13 @@ navDropdownToggle?.addEventListener('click', event => {
   event.stopPropagation();
   const open = navDropdown.classList.toggle('open');
   navDropdownToggle.setAttribute('aria-expanded', String(open));
+});
+
+navCollapse?.addEventListener('click', event => {
+  event.stopPropagation();
+  header?.classList.remove('open');
+  menuButton?.setAttribute('aria-expanded', 'false');
+  menuButton?.focus();
 });
 
 document.addEventListener('click', event => {

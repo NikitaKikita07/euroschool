@@ -56,62 +56,143 @@
   setMeta('meta[name="twitter:image"]', 'content', imageUrl);
   setMeta('meta[itemprop="image"]', 'content', imageUrl);
 
-  const faq = [...document.querySelectorAll('.faq__item')].map(item => ({
-    '@type': 'Question',
-    name: item.querySelector('summary b')?.textContent.trim(),
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.querySelector('.faq__answer')?.textContent.trim()
-    }
-  })).filter(item => item.name && item.acceptedAnswer.text);
+  const isHomePage = /(?:^|\/)(?:index\.html)?$/.test(canonicalUrl.pathname);
+  const organizationId = `${siteUrl}#organization`;
+  const websiteId = `${siteUrl}#website`;
+  const homepageId = `${siteUrl}#webpage`;
 
   const graph = [
     {
       '@type': ['School', 'EducationalOrganization'],
-      '@id': `${siteUrl}#school`,
-      name: 'Європейська гімназія',
-      alternateName: 'Европейская гимназия',
-      url: siteUrl,
-      logo: logoUrl,
-      image: imageUrl,
-      description: 'Приватна школа у Дніпрі з навчанням від дитячого садка до 11 класу.',
-      telephone: '+380671757773',
-      sameAs: [
-        'https://www.youtube.com/@euroschoolDPua/videos',
-        'https://www.instagram.com/euroschool_dnipro'
+      '@id': organizationId,
+      name: 'Частная школа «Европейская гимназия» г. Днепр',
+      alternateName: [
+        'частная школа Европейская гимназия Днепр',
+        'Европейская гимназия Днепр',
+        'Лицей «Европейская гимназия» с начальной школой город Днепр'
       ],
+      url: siteUrl,
+      mainEntityOfPage: { '@id': homepageId },
+      logo: {
+        '@type': 'ImageObject',
+        url: logoUrl
+      },
+      image: imageUrl,
+      description: '30+ лет в образовании. 1—11 классы и детский сад. В гимназии — здоровая среда, без вредных привычек для тела и души. Частная школа полного дня в Днепре.',
+      telephone: '+380671757773',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'вул. Морська, 10',
-        addressLocality: 'Дніпро',
+        streetAddress: 'ул. Морская, 10',
+        addressLocality: 'Днепр',
+        addressRegion: 'Днепропетровская область',
+        postalCode: '49041',
         addressCountry: 'UA'
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 48.441017,
+        longitude: 35.055038
       },
       areaServed: {
         '@type': 'City',
-        name: 'Дніпро'
+        name: 'Днепр'
       },
-      openingHoursSpecification: {
+      openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '09:00',
+        opens: '08:30',
         closes: '17:00'
-      }
+      }],
+      sameAs: [
+        'https://www.youtube.com/@euroschoolDPua/',
+        'https://www.instagram.com/euroschool_dnipro/',
+        'https://www.education.ua/schools/lyceum-yevropeiska-himnaziia--dnipro--1779/'
+      ],
+      knowsAbout: [
+        'Частное образование',
+        'Частная школа',
+        'НУШ',
+        'Школа полного дня',
+        'Начальное образование'
+      ],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Образовательные программы и уровни обучения',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'EducationalOccupationalProgram',
+              name: 'Детский сад «Эврика»',
+              description: 'Дошкольное образование и бережная подготовка детей к школе.'
+            }
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'EducationalOccupationalProgram',
+              name: 'Начальная школа (1–4 классы)',
+              description: 'Развитие эстетических, интеллектуальных и творческих навыков ребёнка с индивидуальным подходом.'
+            }
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'EducationalOccupationalProgram',
+              name: 'Средняя и старшая школа (5–11 классы)',
+              description: 'Полное общее среднее образование, новейшие методики, подготовка к НМТ, углублённое изучение языков и проектная деятельность.'
+            }
+          }
+        ]
+      },
+      amenityFeature: [
+        {
+          '@type': 'LocationFeatureSpecification',
+          name: 'Сертифицированное укрытие',
+          value: true,
+          description: 'Школа оборудована двумя сертифицированными укрытиями для безопасности учеников.'
+        },
+        {
+          '@type': 'LocationFeatureSpecification',
+          name: 'Собственная кухня и столовая',
+          value: true,
+          description: 'Собственное горячее питание, включая диетическое меню, под контролем врача.'
+        },
+        {
+          '@type': 'LocationFeatureSpecification',
+          name: 'Медицинское сопровождение',
+          value: true,
+          description: 'Ежедневное присутствие квалифицированного врача-педиатра.'
+        },
+        {
+          '@type': 'LocationFeatureSpecification',
+          name: 'Интерактивное оборудование',
+          value: true,
+          description: 'Все классы оснащены современными интерактивными дисплеями Newline.'
+        },
+        {
+          '@type': 'LocationFeatureSpecification',
+          name: 'Спортивный и актовый залы',
+          value: true,
+          description: 'Большое футбольное поле, спортзал с душевыми и актовый зал на 150 мест.'
+        }
+      ]
     },
     {
       '@type': 'WebSite',
-      '@id': `${siteUrl}#website`,
+      '@id': websiteId,
       url: siteUrl,
-      name: 'Європейська гімназія',
+      name: 'Европейская гимназия',
       inLanguage: ['uk', 'ru'],
-      publisher: { '@id': `${siteUrl}#school` }
+      publisher: { '@id': organizationId }
     },
     {
       '@type': 'WebPage',
-      '@id': `${pageUrl}#webpage`,
+      '@id': isHomePage ? homepageId : `${pageUrl}#webpage`,
       url: pageUrl,
       name: document.title,
-      isPartOf: { '@id': `${siteUrl}#website` },
-      about: { '@id': `${siteUrl}#school` },
+      isPartOf: { '@id': websiteId },
+      about: { '@id': organizationId },
       image: imageUrl,
       thumbnailUrl: imageUrl,
       primaryImageOfPage: {
@@ -120,15 +201,51 @@
         width: 478,
         height: 478
       },
-      inLanguage: document.documentElement.lang || document.body.dataset.lang || 'uk'
+      inLanguage: document.documentElement.lang || document.body.dataset.lang || 'uk',
+      description: isHomePage
+        ? '30+ лет в образовании. 1—11 классы и детский сад. В гимназии — здоровая среда, без вредных привычек для тела и души. Частная школа полного дня в Днепре.'
+        : document.querySelector('meta[name="description"]')?.content
     }
   ];
 
-  if (faq.length) {
+  if (isHomePage) {
     graph.push({
       '@type': 'FAQPage',
-      '@id': `${pageUrl}#faq`,
-      mainEntity: faq
+      '@id': `${siteUrl}#faq`,
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Какие классы есть в Европейской гимназии?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'У нас действует полный цикл обучения: детский сад «Эврика», начальная школа (1–4 классы), средняя и старшая школа (5–11 классы).'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Какой график работы и пребывания детей в школе?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Дети находятся в гимназии с 08:30 до 17:00. График включает уроки, прогулки, питание, творческие студии и выполнение домашних заданий с педагогом-консультантом.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Как обеспечена безопасность во время воздушных тревог?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Частная школа имеет два собственных сертифицированных укрытия, систему охраны и контроля доступа на территорию.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Как организованы питание и медицинский уход?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Частная школа имеет собственную кухню и столовую без заказного кейтеринга, предусмотрено диетическое меню. В учреждении ежедневно дежурит врач-педиатр.'
+          }
+        }
+      ]
     });
   }
 

@@ -4,7 +4,18 @@ const nav = document.querySelector('.nav');
 const heroVideo = document.querySelector('.hero__video');
 const navDropdown = document.querySelector('.nav__dropdown');
 const navDropdownToggle = document.querySelector('.nav__dropdown-toggle');
+const navCollapse = document.querySelector('.nav__collapse');
 const languageSwitch = document.querySelector('.lang-switch');
+const mobileNavigation = matchMedia('(max-width: 1100px)');
+
+const setDropdownOpen = open => {
+  navDropdown?.classList.toggle('open', open);
+  navDropdownToggle?.setAttribute('aria-expanded', String(open));
+};
+
+const syncDefaultDropdownState = event => setDropdownOpen(event.matches);
+syncDefaultDropdownState(mobileNavigation);
+mobileNavigation.addEventListener('change', syncDefaultDropdownState);
 
 if (languageSwitch && !window.t) {
   const setStaticLanguage = language => {
@@ -64,9 +75,11 @@ const syncHeader = () => header.classList.toggle('scrolled', scrollY > 20);
 addEventListener('scroll', syncHeader, { passive: true });
 syncHeader();
 
-menuButton.addEventListener('click', () => {
+menuButton.addEventListener('click', event => {
+  event.stopPropagation();
   const open = header.classList.toggle('open');
   menuButton.setAttribute('aria-expanded', String(open));
+  if (open && mobileNavigation.matches) setDropdownOpen(true);
 });
 
 nav.addEventListener('click', event => {
@@ -82,6 +95,13 @@ navDropdownToggle?.addEventListener('click', event => {
   event.stopPropagation();
   const open = navDropdown.classList.toggle('open');
   navDropdownToggle.setAttribute('aria-expanded', String(open));
+});
+
+navCollapse?.addEventListener('click', event => {
+  event.stopPropagation();
+  header.classList.remove('open');
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.focus();
 });
 
 document.addEventListener('click', event => {
@@ -420,23 +440,49 @@ document.querySelectorAll('.graduates-carousel').forEach(carousel => {
 document.querySelectorAll('.graduates-insta-card__media-track').forEach(track => {
   if (track.children.length < 2) return;
 
+  const slideCount = track.children.length;
   const prevButton = document.createElement('button');
   const nextButton = document.createElement('button');
+  const pagination = document.createElement('div');
+  const dots = Array.from({ length: slideCount }, (_, index) => {
+    const dot = document.createElement('span');
+    dot.className = `graduates-insta-card__media-dot${index === 0 ? ' is-active' : ''}`;
+    pagination.append(dot);
+    return dot;
+  });
   prevButton.className = 'graduates-insta-card__media-arrow graduates-insta-card__media-arrow--prev';
   nextButton.className = 'graduates-insta-card__media-arrow graduates-insta-card__media-arrow--next';
+  pagination.className = 'graduates-insta-card__media-pagination';
+  pagination.setAttribute('aria-hidden', 'true');
   prevButton.type = 'button';
   nextButton.type = 'button';
   prevButton.setAttribute('aria-label', 'Попереднє фото');
   nextButton.setAttribute('aria-label', 'Наступне фото');
   prevButton.textContent = '‹';
   nextButton.textContent = '›';
-  track.after(prevButton, nextButton);
+  track.after(prevButton, nextButton, pagination);
 
   const loop = setupSeamlessCarousel(track, {
     step: () => track.clientWidth,
     ignorePointerDown: event => event.target.closest('a, button')
   });
   if (loop) graduatesMediaLoops.set(track, loop);
+
+  let paginationFrame = 0;
+  const updatePagination = () => {
+    cancelAnimationFrame(paginationFrame);
+    paginationFrame = requestAnimationFrame(() => {
+      const firstOriginal = track.querySelector(':scope > :not([data-loop-clone])');
+      if (!firstOriginal || !track.clientWidth) return;
+      const rawIndex = Math.round((track.scrollLeft - firstOriginal.offsetLeft) / track.clientWidth);
+      const activeIndex = ((rawIndex % slideCount) + slideCount) % slideCount;
+      dots.forEach((dot, index) => dot.classList.toggle('is-active', index === activeIndex));
+    });
+  };
+
+  track.addEventListener('scroll', updatePagination, { passive: true });
+  addEventListener('resize', updatePagination, { passive: true });
+  requestAnimationFrame(updatePagination);
 });
 
 const lightboxTriggers = document.querySelectorAll('[data-lightbox-src]');
