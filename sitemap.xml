@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://euroschool.dp.ua/</loc>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://euroschool.dp.ua/uk/</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://euroschool.dp.ua/uk/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://euroschool.dp.ua/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://euroschool.dp.ua/uk/"/>
   </url>
-  <url>
-    <loc>https://euroschool.dp.ua/teachers.html</loc>
+  <url><loc>https://euroschool.dp.ua/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://euroschool.dp.ua/uk/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://euroschool.dp.ua/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://euroschool.dp.ua/uk/"/>
   </url>
-  <url>
-    <loc>https://euroschool.dp.ua/creativity.html</loc>
+  <url><loc>https://euroschool.dp.ua/uk/teachers.html</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://euroschool.dp.ua/uk/teachers.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://euroschool.dp.ua/ru/teachers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://euroschool.dp.ua/uk/teachers.html"/>
   </url>
-  <url>
-    <loc>https://euroschool.dp.ua/evrika.html</loc>
+  <url><loc>https://euroschool.dp.ua/ru/teachers.html</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://euroschool.dp.ua/uk/teachers.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://euroschool.dp.ua/ru/teachers.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://euroschool.dp.ua/uk/teachers.html"/>
+  </url>
+  <url><loc>https://euroschool.dp.ua/uk/creativity.html</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://euroschool.dp.ua/uk/creativity.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://euroschool.dp.ua/ru/creativity.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://euroschool.dp.ua/uk/creativity.html"/>
+  </url>
+  <url><loc>https://euroschool.dp.ua/ru/creativity.html</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://euroschool.dp.ua/uk/creativity.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://euroschool.dp.ua/ru/creativity.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://euroschool.dp.ua/uk/creativity.html"/>
+  </url>
+  <url><loc>https://euroschool.dp.ua/uk/evrika.html</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://euroschool.dp.ua/uk/evrika.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://euroschool.dp.ua/ru/evrika.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://euroschool.dp.ua/uk/evrika.html"/>
+  </url>
+  <url><loc>https://euroschool.dp.ua/ru/evrika.html</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://euroschool.dp.ua/uk/evrika.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://euroschool.dp.ua/ru/evrika.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://euroschool.dp.ua/uk/evrika.html"/>
   </url>
 </urlset>

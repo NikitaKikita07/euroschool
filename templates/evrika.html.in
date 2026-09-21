@@ -1,0 +1,397 @@
+﻿<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Дитячий садок Еврика | Європейська гімназія Дніпро</title>
+  <meta name="description" content="Дитячий садок Еврика на базі Європейської гімназії у Дніпрі. Гра, розвиток, творчість, турбота та м’яка підготовка до школи.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Європейська гімназія">
+  <meta name="theme-color" content="#18392f">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="uk_UA">
+  <meta property="og:locale:alternate" content="ru_UA">
+  <meta property="og:site_name" content="Європейська гімназія">
+  <meta property="og:title" content="Дитячий садок Еврика | Європейська гімназія Дніпро">
+  <meta property="og:description" content="Дитячий садок Еврика на базі Європейської гімназії у Дніпрі. Гра, розвиток, творчість, турбота та м’яка підготовка до школи.">
+  <meta property="og:image" content="images/search-preview.jpg">
+  <meta property="og:image:width" content="478">
+  <meta property="og:image:height" content="478">
+  <meta property="og:image:alt" content="Європейська гімназія у Дніпрі">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Дитячий садок Еврика | Європейська гімназія Дніпро">
+  <meta name="twitter:description" content="Гра, розвиток, творчість, турбота та м’яка підготовка до школи.">
+  <meta name="twitter:image" content="images/search-preview.jpg">
+  <meta itemprop="image" content="images/search-preview.jpg">
+  <link rel="image_src" href="images/search-preview.jpg">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="css/site.css?v=20260914-3">
+  <link rel="stylesheet" href="css/evrika.css?v=20260714-1">
+</head>
+<body class="evrika-page" data-lang="uk">
+  <span class="page-top-anchor" id="top" aria-hidden="true"></span>
+  <a class="skip-link" href="#main" data-ru>Перейти к содержанию</a><a class="skip-link" href="#main" data-uk>Перейти до вмісту</a>
+
+  <header class="header">
+    <div class="container header__inner">
+      <button class="lang-switch" type="button" aria-label="Переключить сайт на русский язык">UA</button>
+      <a class="brand" href="index.html" aria-label="Європейська гімназія">
+        <img src="images/school-logo.png" alt="">
+        <span>
+          <b data-ru>Европейская гимназия</b><b data-uk>Європейська гімназія</b>
+          <small data-ru>Днепр</small><small data-uk>Дніпро</small>
+          <small data-ru>ул. Морская 10</small><small data-uk>вул. Морська 10</small>
+        </span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span><span class="sr-only" data-ru>Открыть меню</span><span class="sr-only" data-uk>Відкрити меню</span>
+      </button>
+      <nav class="nav" id="main-nav" aria-label="Основная навигация">
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-toggle" type="button" aria-expanded="false" aria-controls="about-dropdown"><span data-ru>О школе</span><span data-uk>Про школу</span></button>
+          <div class="nav__dropdown-menu" id="about-dropdown">
+            <a href="index.html#about" data-ru>Европейская гимназия</a><a href="index.html#about" data-uk>Європейська гімназія</a>
+            <a href="evrika.html" data-ru>Детский сад Эврика</a><a href="evrika.html" data-uk>Дитячий сад Еврика</a>
+            <a href="teachers.html" data-ru>Наши учителя</a><a href="teachers.html" data-uk>Наші вчителі</a>
+            <a href="index.html#children-gallery" data-ru>Наши дети</a><a href="index.html#children-gallery" data-uk>Наші діти</a>
+            <a href="creativity.html" data-ru>Творчество</a><a href="creativity.html" data-uk>Творчість</a>
+          </div>
+        </div>
+        <a href="index.html#ourschool" data-ru>Обучение</a><a href="index.html#ourschool" data-uk>Навчання</a>
+        <a href="index.html#graduates" data-ru>Преимущества</a><a href="index.html#graduates" data-uk>Переваги</a>
+        <a href="#contacts" data-ru>Контакты</a><a href="#contacts" data-uk>Контакти</a>
+        <a class="nav__social" href="https://www.youtube.com/@euroschoolDPua/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube Європейської гімназії">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/>
+          </svg>
+        </a>
+        <a class="nav__social" href="https://www.instagram.com/euroschool_dnipro" target="_blank" rel="noopener noreferrer" aria-label="Instagram Європейської гімназії">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7.7 2h8.6A5.7 5.7 0 0 1 22 7.7v8.6a5.7 5.7 0 0 1-5.7 5.7H7.7A5.7 5.7 0 0 1 2 16.3V7.7A5.7 5.7 0 0 1 7.7 2Zm-.2 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm9.25 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
+          </svg>
+        </a>
+        <button class="nav__collapse" type="button">
+          <span class="sr-only" data-ru>Закрыть основное меню</span><span class="sr-only" data-uk>Закрити основне меню</span>
+          <span class="nav__collapse-icon" aria-hidden="true"></span>
+        </button>
+      </nav>
+      <a class="header__phone" href="tel:+380671757773" aria-label="Позвонить: +38 067 175 77 73">
+        <span class="header__phone-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 2.7 10 7.5a1.5 1.5 0 0 1-.35 1.9l-1.5 1.2a14 14 0 0 0 5.25 5.25l1.2-1.5a1.5 1.5 0 0 1 1.9-.35l4.8 2.8a1.5 1.5 0 0 1 .68 1.68l-.55 2.35A1.5 1.5 0 0 1 19.96 22C10.04 22 2 13.96 2 4.04a1.5 1.5 0 0 1 1.17-1.46l2.35-.56a1.5 1.5 0 0 1 1.68.68Z"/></svg></span>
+        <span class="header__phone-copy"><b>+38 (067) 175-77-73</b></span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="evrika-hero">
+      <img class="evrika-hero__image" src="images/evrika/evrikaHero.JPG" alt="">
+      <div class="evrika-hero__shade"></div>
+      <div class="container evrika-hero__content">
+        <div class="eyebrow eyebrow--light" data-ru>Детский садик при Европейской гимназии</div>
+        <div class="eyebrow eyebrow--light" data-uk>Дитячий садок при Європейській гімназії</div>
+        <h1 data-ru>Детский садик «Эврика»</h1>
+        <h1 data-uk>Дитячий садок «Еврика»</h1>
+        <p data-ru>Добрая, веселая семья для самых маленьких жителей гимназии.</p>
+        <p data-uk>Добра, весела родина для найменших мешканців гімназії.</p>
+        <div class="evrika-hero__actions">
+          <a class="button" href="#contacts" data-contact-modal-open data-ru>Записаться на встречу <span>↗</span></a>
+          <a class="button" href="#contacts" data-contact-modal-open data-uk>Записатися на зустріч <span>↗</span></a>
+          <a class="button button--ghost" href="#moments" data-ru>Посмотреть жизнь сада</a>
+          <a class="button button--ghost" href="#moments" data-uk>Подивитися життя саду</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="evrika-owls" aria-label="Совы Еврики">
+      <div class="container">
+        <img src="images/evrika/5owls.jpg" alt="" loading="lazy" decoding="async">
+      </div>
+    </section>
+
+    <section class="section wonder">
+      <div class="container wonder__inner">
+        <div class="eyebrow eyebrow--light" data-ru>Самое удивительное</div>
+        <div class="eyebrow eyebrow--light" data-uk>Найдивовижніше</div>
+        <div class="wonder__text" data-ru>
+          <p>А какое чудо на свете самое удивительное?</p>
+          <p>Самое удивительное?</p>
+          <p>Ну, самое, самое?</p>
+          <p>Да, какое чудо на свете – самое удивительное?</p>
+          <p>Надо подумать. На свете много чудес.</p>
+          <p>Но, мы думаем, что самое удивительное чудо – это дети!</p>
+        </div>
+        <div class="wonder__text" data-uk>
+          <p>А яке диво на світі найдивовижніше?</p>
+          <p>Найдивовижніше?</p>
+          <p>Ну, най-най?</p>
+          <p>Так, яке диво на світі найособливіше?</p>
+          <p>Треба подумати. На світі багато див.</p>
+          <p>Але ми думаємо, що найдивовижніше диво — це діти!</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section center-copy">
+      <div class="container center-copy__inner">
+        <p data-ru>Детский садик, открытый на базе «Европейской гимназии» - это добрая, веселая семья, в которой никогда не бывает скучно. Здесь подрастают наши самые маленькие и любимые жители. Не стоит думать, что детский сад это занятия, занятия и еще раз занятия. Дошкольное детство - это, прежде всего, ИГРА, и мы организуем игру ребенка так, чтобы, играя, он усваивал все, что позволяет усвоить его возраст.</p>
+        <p data-uk>Дитячий садок, відкритий на базі «Європейської гімназії», - це добра, весела сім’я, у якій ніколи не буває нудно. Тут підростають наші найменші й найулюбленіші мешканці. Дошкільне дитинство - це насамперед гра, і ми організовуємо її так, щоб дитина, граючись, засвоювала все важливе для свого віку.</p>
+      </div>
+    </section>
+
+    <section class="section tile-gallery" id="children">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">Галерея</div><h2 data-ru>Наши дети</h2><h2 data-uk>Наші діти</h2></div>
+        </div>
+        <div class="tile-grid">
+          <div class="photo-tile photo-tile--wide"><img src="images/galery/evr01/photo1.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="photo-tile photo-tile--wide"><img src="images/galery/evr01/photo2.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="photo-tile"><img src="images/galery/evr01/photo3.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="photo-tile photo-tile--wide"><img src="images/galery/evr01/photo4.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="photo-tile"><img src="images/galery/evr01/photo5.jpg" alt="" loading="lazy" decoding="async"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section learning-bg">
+      <div class="container learning-bg__inner">
+        <div data-ru>
+          <p>Обучение детей строится как увлекательное действие, которое позволяет ребенку проявлять любознательность, познавать окружающий мир и учиться без принуждения.</p>
+          <p>Наша задача - воспитание свободного, творческого, уверенного в себе человека, умеющего на практике применить полученные знания, умения и навыки.</p>
+          <p>Кроме воспитателей, которые занимаются своими малышами, с детьми работают педагоги начальной школы: преподаватели английского языка, музыки, танцев, физкультуры.</p>
+          <p>Наши воспитатели такие же разные, как и дети, но объединяет их доброта, любознательность и добросовестность.</p>
+        </div>
+        <div data-uk>
+          <p>Навчання дітей будується як захоплива діяльність, що дозволяє проявляти допитливість, пізнавати світ і вчитися без примусу.</p>
+          <p>Наше завдання - виховання вільної, творчої, упевненої в собі людини, яка вміє застосовувати знання на практиці.</p>
+          <p>Окрім вихователів, з дітьми працюють педагоги початкової школи: викладачі англійської, музики, танців і фізкультури.</p>
+          <p>Наші вихователі такі ж різні, як і діти, але їх об’єднують доброта, допитливість і сумлінність.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section placeholder-carousel" id="moments">
+      <div class="container">
+        <div class="section-head"><div><div class="eyebrow" data-ru>Фото</div><div class="eyebrow" data-uk>Фото</div><h2 data-ru>Моменты дня</h2><h2 data-uk>Моменти дня</h2></div></div>
+        <div class="photo-carousel">
+          <button class="photo-carousel__arrow photo-carousel__arrow--prev" type="button" aria-label="Назад">←</button>
+          <div class="photo-grid">
+            <div class="placeholder-tile"><img src="images/galery/evr02/001.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="placeholder-tile"><img src="images/galery/evr02/002.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="placeholder-tile"><img src="images/galery/evr02/003.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="placeholder-tile"><img src="images/galery/evr02/004.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="placeholder-tile"><img src="images/galery/evr02/005.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="placeholder-tile"><img src="images/galery/evr02/006.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="placeholder-tile"><img src="images/galery/evr02/007.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="placeholder-tile"><img src="images/galery/evr02/008.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="placeholder-tile"><img src="images/galery/evr02/009.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="placeholder-tile"><img src="images/galery/evr02/010.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="placeholder-tile"><img src="images/galery/evr02/011.jpg" alt="" loading="lazy" decoding="async"></div>
+
+          </div>
+          <button class="photo-carousel__arrow photo-carousel__arrow--next" type="button" aria-label="Вперед">→</button>
+        </div>
+        <div class="photo-carousel photo-carousel--vertical">
+          <button class="photo-carousel__arrow photo-carousel__arrow--prev" type="button" aria-label="Назад">←</button>
+          <div class="photo-grid photo-grid--compact photo-grid--vertical">
+            <div class="photo-tile"><img src="images/galery/evr03/001.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/001.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/002.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/002.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/003.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/003.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/004.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/004.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/005.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/005.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/006.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/006.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/007.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/007.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/008.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/008.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/009.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/009.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/010.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/010.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/011.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/011.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/012.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/012.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/013.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/013.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/014.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/014.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/015.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/015.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr03/016.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr03/016.jpg" aria-label="Збільшити фото"></button></div>
+
+          </div>
+          <button class="photo-carousel__arrow photo-carousel__arrow--next" type="button" aria-label="Вперед">→</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section video-showcase" id="videos">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow eyebrow--light">Відео</div><h2 data-ru>Наши спектакли</h2><h2 data-uk>Наші вистави</h2></div>
+        </div>
+        <div class="video-showcase__layout">
+          <div class="video-showcase__stage">
+            <iframe id="evrika-player" class="video-showcase__main" src="https://www.youtube.com/embed/CJpjuDebz2Q?rel=0&playsinline=1" title="Чи мишаче це діло дивитися на зірки" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <div class="video-showcase__side">
+            <div class="performances__playlist video-showcase__playlist">
+              <div class="performances__playlist-head"><span data-ru>Плейлист</span><span data-uk>Плейлист</span><b data-ru>3 видео</b><b data-uk>3 відео</b></div>
+              <div class="performances__items">
+                <button class="performance-item active" type="button" data-video-id="CJpjuDebz2Q" data-video-title="Чи мишаче це діло дивитися на зірки" data-video-title-ru="Разве мышиное это дело смотреть на звезды" data-video-title-uk="Чи мишаче це діло дивитися на зірки" aria-pressed="true"><span class="performance-item__number"></span><span class="performance-item__copy"><b data-ru>Разве мышиное это дело смотреть на звезды</b><b data-uk>Чи мишаче це діло дивитися на зірки</b><small data-ru>Европейская гимназия · Shorts</small><small data-uk>Європейська гімназія · Shorts</small></span><i>▶</i></button>
+                <button class="performance-item" type="button" data-video-id="67ngg19_f68" data-video-title="Пригоди Вінні Пуха та друзів" data-video-title-ru="Приключения Винни-Пуха и друзей" data-video-title-uk="Пригоди Вінні Пуха та друзів" aria-pressed="false"><span class="performance-item__number"></span><span class="performance-item__copy"><b data-ru>Приключения Винни-Пуха и друзей</b><b data-uk>Пригоди Вінні Пуха та друзів</b><small data-ru>Европейская гимназия · видео</small><small data-uk>Європейська гімназія · відео</small></span><i>▶</i></button>
+                <button class="performance-item" type="button" data-video-id="lm0EDjv-kqw" data-video-title="ЕВРИКА Happy New Year" data-video-title-ru="ЭВРИКА Happy New Year" data-video-title-uk="ЕВРИКА Happy New Year" aria-pressed="false"><span class="performance-item__number"></span><span class="performance-item__copy"><b data-ru>ЭВРИКА Happy New Year</b><b data-uk>ЕВРИКА Happy New Year</b><small data-ru>Европейская гимназия · спектакль</small><small data-uk>Європейська гімназія · вистава</small></span><i>▶</i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-showcase__previews" aria-label="Дополнительные видео">
+          <iframe src="https://www.youtube.com/embed/67ngg19_f68?rel=0&playsinline=1" title="Пригоди Вінні Пуха та друзів" loading="lazy" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/-nzNNtLODoA?rel=0&playsinline=1" title="Дюймовочка в дитячому садку 2025" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="video-showcase__previews" aria-label="Дополнительные видео">
+          <iframe src="https://www.youtube.com/embed/GNjtVBupCIU?rel=0&playsinline=1" title="Новорiчне свято у дитячому садку 2025" loading="lazy" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/lm0EDjv-kqw?rel=0&playsinline=1" title="ЕВРИКА Happy New Year" loading="lazy" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="section owl-sleep">
+      <div class="container"><img src="images/evrika/owlssleep.jpg" alt=""></div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <div class="container faq__grid">
+        <div class="faq__intro">
+          <div class="eyebrow" data-ru>Полезная информация</div><div class="eyebrow" data-uk>Корисна інформація</div>
+          <h2 data-ru>Частые вопросы</h2><h2 data-uk>Часті питання</h2>
+          <p data-ru>Собрали ответы на вопросы, которые чаще всего задают родители перед знакомством с садом.</p>
+          <p data-uk>Зібрали відповіді на питання, які найчастіше ставлять батьки перед знайомством із садом.</p>
+          <a class="button" href="#contacts" data-contact-modal-open data-ru>Задать вопрос <span>→</span></a>
+          <a class="button" href="#contacts" data-contact-modal-open data-uk>Поставити питання <span>→</span></a>
+        </div>
+        <div class="faq__list">
+          <details class="faq__item" open><summary><span></span><b data-ru>С какого возраста принимаете детей?</b><b data-uk>З якого віку приймаєте дітей?</b><i></i></summary><div class="faq__answer"><p data-ru>Мы принимаем детей с 3 лет, но есть возможность привести ребенка и раньше, если он достаточно самостоятелен для пребывания в небольшом детском коллективе. Однако такую готовность ребенка лучше обсудить индивидуально во время знакомства.</p><p data-uk>Ми приймаємо дітей з 3 рочків, але є можливість привести дитину і раніше, якщо вона достатньо самостійна для перебування в маленькому дитячому колективі, але таку готовність дитини краще обговорити індивідуально під час знайомства.</p></div></details>
+          <details class="faq__item"><summary><span></span><b data-ru>Как построено обучение?</b><b data-uk>Як побудоване навчання?</b><i></i></summary><div class="faq__answer"><p data-ru>Через игру, творчество, движение и практические задания без принуждения.</p><p data-uk>Через гру, творчість, рух і практичні завдання без примусу.</p></div></details>
+          <details class="faq__item"><summary><span></span><b data-ru>Есть ли в детском саду укрытие и генератор?</b><b data-uk>Чи є у дитячому садочку укриття та генератор?</b><i></i></summary><div class="faq__answer"><p data-ru>У детского сада есть отдельное укрытие, кровати для дневного сна также находятся в укрытии, генераторы позволяют продолжать обучение и приготовление пищи даже в случае отсутствия электроснабжения в течение учебного дня.</p><p data-uk>Садочок має окреме укриття, ліжка для денного сну також знаходяться в укритті, генератори дозволяють продовжувати навчання та приготування їжі навіть у разі відсутності електропостачання на протязі навчального дня.</p></div></details>
+          <details class="faq__item"><summary><span></span><b data-ru>Организовано ли в образовательном учреждении медицинское сопровождение?</b><b data-uk>Чи організовано в освітньому закладі медичний супровід?</b><i></i></summary><div class="faq__answer"><p data-ru>Воспитанники детского сада находятся под профессиональным медицинским наблюдением нашего врача-педиатра с 8:30 до 17:00.</p><p data-uk>Вихованці дитячого садочка знаходяться під професійним медичним наглядом нашого лікаря-педіатра з 8.30 до 17.00.</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section photo-gallery photo-gallery--after-tuition" id="more-photos">
+      <div class="container">
+        <div class="section-head">
+          <img class="evrika-owllike" src="images/evrika/owllike.jpg" alt="" width="416" height="436" loading="lazy" decoding="async">
+          <div><div class="eyebrow" data-ru>Еще фото</div><div class="eyebrow" data-uk>Ще фото</div><h2 data-ru>На стороне ребенка</h2><h2 data-uk>На боці дитини</h2></div>
+        </div>
+        <div class="photo-carousel">
+          <button class="photo-carousel__arrow photo-carousel__arrow--prev" type="button" aria-label="Назад">←</button>
+          <div class="photo-grid photo-grid--compact">
+            <div class="photo-tile photo-tile--wide"><img src="images/galery/evr04/001.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr04/001.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile photo-tile--wide photo-tile--top"><img src="images/galery/evr04/002.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr04/002.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr04/003.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr04/003.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr04/004.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr04/004.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile photo-tile--wide"><img src="images/galery/evr04/005.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr04/005.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr04/006.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr04/006.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr04/007.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr04/007.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile photo-tile--wide"><img src="images/galery/evr04/008.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr04/008.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr04/009.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr04/009.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr04/010.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr04/010.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile photo-tile--wide"><img src="images/galery/evr04/011.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr04/011.jpg" aria-label="Збільшити фото"></button></div>
+            <div class="photo-tile"><img src="images/galery/evr04/012.jpg" alt="" loading="lazy" decoding="async"><button class="photo-tile__zoom" type="button" data-lightbox-src="images/galery/evr04/012.jpg" aria-label="Збільшити фото"></button></div>
+          </div>
+          <button class="photo-carousel__arrow photo-carousel__arrow--next" type="button" aria-label="Вперед">→</button>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section route" id="route">
+      <div class="container route__grid">
+        <div class="route__content">
+          <div class="eyebrow" data-ru>Как нас найти</div><div class="eyebrow" data-uk>Як нас знайти</div>
+          <h2 data-ru>Проложить маршрут</h2><h2 data-uk>Прокласти маршрут</h2>
+          <p data-ru>Детский сад «Эврика» находится на базе Европейской гимназии в Днепре. Постройте удобный маршрут в Google Maps.</p>
+          <p data-uk>Дитячий сад «Еврика» розташований на базі Європейської гімназії у Дніпрі. Побудуйте зручний маршрут у Google Maps.</p>
+          <div class="route__address"><span class="route__pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.7 8 12 8 12s8-6.3 8-12a8 8 0 0 0-8-8Zm0 11.2A3.2 3.2 0 1 1 12 6.8a3.2 3.2 0 0 1 0 6.4Z"/></svg></span><span><small data-ru>Адрес</small><small data-uk>Адреса</small><strong data-ru>г. Днепр, ул. Морская, 10</strong><strong data-uk>м. Дніпро, вул. Морська, 10</strong></span></div>
+          <a class="button route__button" href="https://www.google.com/maps/dir/?api=1&destination=Дніпро%2C+вулиця+Морська%2C+10" target="_blank" rel="noopener noreferrer" data-ru>Открыть маршрут <span>↗</span></a>
+          <a class="button route__button" href="https://www.google.com/maps/dir/?api=1&destination=Дніпро%2C+вулиця+Морська%2C+10" target="_blank" rel="noopener noreferrer" data-uk>Відкрити маршрут <span>↗</span></a>
+        </div>
+        <div class="route__map"><iframe src="https://maps.google.com/maps?q=Дніпро%2C%20вулиця%20Морська%2C%2010&z=16&output=embed" title="Европейская гимназия на карте" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+      </div>
+    </section>
+
+
+    <section class="section contact" id="contacts">
+      <div class="container contact__compact">
+        <h2 data-ru>Будем рады знакомству</h2><h2 data-uk>Будемо раді знайомству</h2>
+        <div class="contact__actions">
+          <div class="contact__call">
+            <span data-ru>Позвоните</span><span data-uk>Зателефонуйте</span>
+            <strong><a href="tel:+380671757773">(067) 175-77-73</a></strong>
+            <a href="tel:+380671757773" aria-label="Позвонить в Европейскую гимназию">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7.2 2.7 10 7.5a1.5 1.5 0 0 1-.35 1.9l-1.5 1.2a14 14 0 0 0 5.25 5.25l1.2-1.5a1.5 1.5 0 0 1 1.9-.35l4.8 2.8a1.5 1.5 0 0 1 .68 1.68l-.55 2.35A1.5 1.5 0 0 1 19.96 22C10.04 22 2 13.96 2 4.04a1.5 1.5 0 0 1 1.17-1.46l2.35-.56a1.5 1.5 0 0 1 1.68.68Z"/>
+              </svg>
+            </a>
+          </div>
+          <span class="contact__or" data-ru>или</span><span class="contact__or" data-uk>або</span>
+          <div class="contact__meeting-wrap">
+            <span data-ru>Записаться на встречу</span><span data-uk>Записатися на зустріч</span>
+            <button class="contact__meeting" type="button" data-contact-modal-open><b data-ru>Отправить заявку <i>→</i></b><b data-uk>Надіслати заявку <i>→</i></b></button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="contact-modal" aria-hidden="true">
+    <div class="contact-modal__backdrop" data-contact-modal-close></div>
+    <form class="contact-form contact-modal__panel" action="https://formsubmit.co/ajax/escdpua@gmail.com" method="POST" novalidate>
+      <button class="contact-modal__close" type="button" data-contact-modal-close aria-label="Закрыть форму">×</button>
+      <h3 data-ru>Записаться на встречу</h3><h3 data-uk>Записатися на зустріч</h3>
+      <p data-ru>Заполните форму, и мы свяжемся с вами.</p><p data-uk>Заповніть форму, і ми зв’яжемося з вами.</p>
+      <label><span data-ru>Имя</span><span data-uk>Ім’я</span><input name="name" autocomplete="name" required data-placeholder-ru="Как к вам обращаться?" data-placeholder-uk="Як до вас звертатися?"><small></small></label>
+      <label><span data-ru>Телефон</span><span data-uk>Телефон</span><input name="phone" type="tel" autocomplete="tel" required placeholder="+38 (___) ___-__-__"><small></small></label>
+      <label><span data-ru>Сообщение</span><span data-uk>Повідомлення</span><textarea name="message" rows="3" data-placeholder-ru="Ваш вопрос" data-placeholder-uk="Ваше запитання"></textarea><small></small></label>
+      <button class="button" type="submit" data-ru>Отправить заявку <span>→</span></button>
+      <button class="button" type="submit" data-uk>Надіслати заявку <span>→</span></button>
+      <div class="form-status" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__main">
+      <div class="container footer__hero">
+        <div class="footer__school"><strong data-ru>Европейская гимназия</strong><strong data-uk>Європейська гімназія</strong><a href="tel:+380671757773">тел: (067) 175-77-73</a></div>
+        <a class="footer__logo" href="#top" aria-label="Наверх"><img src="images/school-logo.svg" alt="" width="96" height="96" loading="lazy" decoding="async"></a>
+        <div class="footer__address"><strong data-ru>частная школа</strong><strong data-uk>приватна школа</strong><span data-ru>Днепр</span><span data-uk>Дніпро</span><span data-ru>ул. Морская, 10</span><span data-uk>вул. Морська, 10</span></div>
+        <a class="footer__to-top" href="#top" aria-label="Наверх">↑</a>
+      </div>
+      <div class="container footer__meta">© <span id="year"></span> <span data-ru>Европейская гимназия</span><span data-uk>Європейська гімназія</span></div>
+      <nav class="container footer__nav" aria-label="Навигация в подвале">
+        <a href="index.html#about" data-ru>О школе</a><a href="index.html#about" data-uk>Про школу</a>
+        <a href="index.html#tuition" data-ru>Преимущества</a><a href="index.html#tuition" data-uk>Переваги</a>
+        <a href="evrika.html" data-ru>Наш детсад</a><a href="evrika.html" data-uk>Наш дитсад</a>
+        <a href="teachers.html" data-ru>Наши учителя</a><a href="teachers.html" data-uk>Наші вчителі</a>
+        <a href="creativity.html" data-ru>Творчество</a><a href="creativity.html" data-uk>Творчість</a>
+        <a href="index.html#school-gallery" data-ru>Фотогалерея</a><a href="index.html#school-gallery" data-uk>Фотогалерея</a>
+        <a href="#route">Маршрут</a>
+      </nav>
+    </div>
+    <section class="footer__social-section" aria-labelledby="footer-socials-title">
+      <div class="container footer__social-inner">
+        <h2 id="footer-socials-title"><span data-ru>Мы в соцсетях</span><span data-uk>Ми в соцмережах</span></h2>
+        <div class="footer__socials" aria-label="Социальные сети школы">
+          <a href="https://www.instagram.com/euroschool_dnipro" target="_blank" rel="noopener noreferrer" aria-label="Instagram Европейской гимназии">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.7 2h8.6A5.7 5.7 0 0 1 22 7.7v8.6a5.7 5.7 0 0 1-5.7 5.7H7.7A5.7 5.7 0 0 1 2 16.3V7.7A5.7 5.7 0 0 1 7.7 2Zm-.2 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm9.25 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
+            </svg>
+          </a>
+          <a href="https://www.youtube.com/@euroschoolDPua/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube Европейской гимназии">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </footer>
+
+  <script src="js/evrika.js?v=20260730-2" defer></script>
+  <script src="js/phone-mask.js?v=20260824-1" defer></script>
+</body>
+</html>

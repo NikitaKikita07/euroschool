@@ -1,5 +1,4 @@
-(() => {
-const translations = new Map([
+[
   [
     "Детский сад Эврика",
     "Дитячий сад Еврика"
@@ -1232,32 +1231,4 @@ const translations = new Map([
     "Фото выпускника",
     "Фото випускника"
   ]
-]);
-
-const reverseTranslations = new Map([...translations].map(([ru, uk]) => [uk, ru]));
-const translateValue = (value, language) => {
-  const dictionary = language === 'uk' ? translations : reverseTranslations;
-  if (dictionary.has(value)) return dictionary.get(value);
-  let translated = value;
-  [...dictionary.entries()]
-    .sort((a, b) => b[0].length - a[0].length)
-    .forEach(([source, target]) => {
-      if (source && translated.includes(source)) {
-        translated = translated.split(source).join(target);
-      }
-    });
-  return translated;
-};
-
-
-window.siteLanguage = document.documentElement.lang;
-window.t = value => translateValue(value, window.siteLanguage);
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".lang-switch").forEach(link => {
-    const target = new URL(link.href);
-    target.search = location.search;
-    target.hash = location.hash;
-    link.href = target.href;
-  });
-});
-})();
+]

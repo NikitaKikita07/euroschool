@@ -17,49 +17,6 @@ const syncDefaultDropdownState = event => setDropdownOpen(event.matches);
 syncDefaultDropdownState(mobileNavigation);
 mobileNavigation.addEventListener('change', syncDefaultDropdownState);
 
-if (languageSwitch && !window.t) {
-  const setStaticLanguage = language => {
-    document.documentElement.lang = language;
-    document.body.dataset.lang = language;
-    languageSwitch.textContent = language === 'uk' ? 'UA' : 'RU';
-    languageSwitch.setAttribute(
-      'aria-label',
-      language === 'uk'
-        ? 'Переключить сайт на русский язык'
-        : 'Перемкнути сайт українською мовою'
-    );
-    document.querySelectorAll('[data-placeholder-ru],[data-placeholder-uk]').forEach(element => {
-      const value = element.dataset[`placeholder${language === 'uk' ? 'Uk' : 'Ru'}`];
-      if (value) element.setAttribute('placeholder', value);
-    });
-    document.querySelectorAll('[data-aria-label-ru],[data-aria-label-uk]').forEach(element => {
-      const value = element.dataset[`ariaLabel${language === 'uk' ? 'Uk' : 'Ru'}`];
-      if (value) element.setAttribute('aria-label', value);
-    });
-    document.querySelectorAll('[data-title-ru],[data-title-uk]').forEach(element => {
-      const value = element.dataset[`title${language === 'uk' ? 'Uk' : 'Ru'}`];
-      if (value) element.setAttribute('title', value);
-    });
-    document.querySelectorAll('[data-alt-ru],[data-alt-uk]').forEach(element => {
-      const value = element.dataset[`alt${language === 'uk' ? 'Uk' : 'Ru'}`];
-      if (value) element.setAttribute('alt', value);
-    });
-    localStorage.setItem('site-language', language);
-    window.siteLanguage = language;
-  };
-
-  const preferredLanguage = localStorage.getItem('site-language');
-  if (preferredLanguage === 'ru' || preferredLanguage === 'uk') {
-    setStaticLanguage(preferredLanguage);
-  } else {
-    setStaticLanguage(document.body.dataset.lang === 'ru' ? 'ru' : 'uk');
-  }
-
-  languageSwitch.addEventListener('click', () => {
-    setStaticLanguage(document.body.dataset.lang === 'uk' ? 'ru' : 'uk');
-  });
-}
-
 const startHeroVideo = () => {
   if (!heroVideo || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   heroVideo.play().catch(() => {});
