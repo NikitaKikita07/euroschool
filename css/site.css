@@ -862,8 +862,8 @@ input:focus,textarea:focus{
 .story-split--reverse .story-split__copy{order:2}
 .story-split__copy p{color:var(--muted)}
 .story-split__copy p strong{color:var(--ink)}
-.story-split__media{position:relative;width:100%;height:min(560px,58vw);min-height:390px;overflow:hidden;border:1px solid rgba(255,255,255,.9);border-radius:30px;box-shadow:0 26px 65px rgba(8,78,68,.13)}
-.story-split__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:storyPhotoSwap 24s infinite paused;transition:filter .35s ease,transform .65s cubic-bezier(.2,.75,.2,1)}
+.story-split__media{position:relative;width:100%;height:min(560px,58vw);min-height:560px;overflow:hidden;border:1px solid rgba(255,255,255,.9);border-radius:30px;box-shadow:0 26px 65px rgba(8,78,68,.13)}
+.story-split__media img{position:absolute;inset:0;width:100%;height:100%;min-height:560px;object-fit:cover;opacity:0;animation:storyPhotoSwap 24s infinite paused;transition:filter .35s ease,transform .65s cubic-bezier(.2,.75,.2,1)}
 .story-split__media img:first-child{opacity:1}
 .story-split__media img:nth-child(2){animation-delay:12s}
 .story-split--photo-cycle-active .story-split__media img{animation-play-state:running}
@@ -1045,7 +1045,7 @@ input:focus,textarea:focus{
   .lightbox .lightbox__nav{width:38px;height:64px;font-size:54px}
   .photo-grid--vertical .photo-tile,.photo-grid--vertical .photo-tile--wide{flex-basis:72vw;height:420px}
   .photo-carousel__arrow{width:46px;height:46px;font-size:19px}
-  .story-split__media{height:310px;min-height:0;border-radius:24px}
+  .story-split__media{height:560px;min-height:0;border-radius:24px}
   .owl-spot{width:min(145px,46vw)}
   .owl-spot--learn{width:min(250px,72vw);margin:0 auto}
   .photo-gallery .section-head{min-height:290px}
