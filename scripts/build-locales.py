@@ -130,11 +130,14 @@ class Localize(HTMLParser):
         if not self.stack or not self.stack[-1][1]: self.out.append('<!--' + data + '-->')
 
 def redirect(target):
+    path, separator, fragment = target.partition('#')
+    destination = (json.dumps(path) + ' + location.search + ' + json.dumps('#' + fragment)
+                   if separator else json.dumps(target) + ' + location.search + location.hash')
     return f'''<!doctype html>
 <html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Європейська гімназія</title><link rel="canonical" href="{ORIGIN}{target}">
 <meta http-equiv="refresh" content="0; url={target}">
-<script>location.replace({json.dumps(target)} + location.search + location.hash);</script>
+<script>location.replace({destination});</script>
 </head><body><a href="{target}">Перейти на українську версію сайту</a></body></html>
 '''
 
@@ -149,7 +152,16 @@ for page in META:
         html = html.replace('</head>', markup + '</head>', 1)
         (ROOT / lang / page).write_text(html, encoding='utf-8')
     (ROOT / page).write_text(redirect(url('uk', page)), encoding='utf-8')
-(ROOT / 'eureka/index.html').write_text(redirect('/uk/evrika.html'), encoding='utf-8')
+for alias, target in {
+    'eureka': '/uk/evrika.html',
+    'teachers': '/uk/teachers.html',
+    'creativ': '/uk/creativity.html',
+    'galery': '/uk/#children-gallery',
+    'gallery': '/uk/#children-gallery',
+}.items():
+    directory = ROOT / alias
+    directory.mkdir(exist_ok=True)
+    (directory / 'index.html').write_text(redirect(target), encoding='utf-8')
 xml = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">']
 for page in META:
     for lang in ('uk', 'ru'):
@@ -167,4 +179,3 @@ start = source.index('const translations')
 end = source.index('const reverseTranslations')
 source = source[:start] + 'const translations = new Map(' + json.dumps(PAIRS, ensure_ascii=False, indent=2) + ');\n\n' + source[end:]
 runtime.write_text(source, encoding='utf-8')
-
