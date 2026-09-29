@@ -130,14 +130,10 @@ class Localize(HTMLParser):
         if not self.stack or not self.stack[-1][1]: self.out.append('<!--' + data + '-->')
 
 def redirect(target):
-    path, separator, fragment = target.partition('#')
-    destination = (json.dumps(path) + ' + location.search + ' + json.dumps('#' + fragment)
-                   if separator else json.dumps(target) + ' + location.search + location.hash')
+    # HTTP redirects are handled by .htaccess; keep a manual fallback link.
     return f'''<!doctype html>
 <html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Європейська гімназія</title><link rel="canonical" href="{ORIGIN}{target}">
-<meta http-equiv="refresh" content="0; url={target}">
-<script>location.replace({destination});</script>
 </head><body><a href="{target}">Перейти на українську версію сайту</a></body></html>
 '''
 

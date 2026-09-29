@@ -1,0 +1,16 @@
+DirectoryIndex index.html
+RewriteEngine On
+
+# Redirect only explicit index.html requests, not Apache's DirectoryIndex lookup.
+RewriteCond %{THE_REQUEST} \s/+(uk|ru)/index\.html(?:[?\s])
+RewriteRule ^(uk|ru)/index\.html$ https://euroschool.dp.ua/$1/ [R=301,L]
+
+# Legacy URLs go directly to their canonical language pages.
+# Query strings are preserved automatically.
+RewriteRule ^(?:index\.html)?$ https://euroschool.dp.ua/uk/ [R=301,L]
+RewriteRule ^teachers(?:\.html|/?|/index\.html)$ https://euroschool.dp.ua/uk/teachers.html [R=301,L]
+RewriteRule ^creativity\.html$ https://euroschool.dp.ua/uk/creativity.html [R=301,L]
+RewriteRule ^creativ(?:/?|/index\.html)$ https://euroschool.dp.ua/uk/creativity.html [R=301,L]
+RewriteRule ^evrika\.html$ https://euroschool.dp.ua/uk/evrika.html [R=301,L]
+RewriteRule ^eureka(?:/?|/index\.html)$ https://euroschool.dp.ua/uk/evrika.html [R=301,L]
+RewriteRule ^(?:gallery|galery)(?:/?|/index\.html)$ https://euroschool.dp.ua/uk/#children-gallery [R=301,L,NE]

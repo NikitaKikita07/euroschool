@@ -50,7 +50,8 @@ img{height:auto}
 .motion-ready .owl-spot--learn.reveal.is-visible{filter:none}
 .motion-ready .owl-spot--school.reveal.is-visible{filter:none}
 .motion-ready .owl-spot--gallery.reveal.is-visible{filter:none}
-.hero__content>*{
+/* Paint the LCP heading immediately; animate only secondary hero content. */
+.hero__content> :not(h1){
   animation:hero-enter .9s cubic-bezier(.2,.75,.2,1) both;
 }
 .hero__content>*:nth-child(2){animation-delay:.08s}
