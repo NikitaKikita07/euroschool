@@ -1,4 +1,12 @@
 DirectoryIndex index.html
+
+# Keep decorative homepage hero media out of search indexes.
+<IfModule mod_headers.c>
+  <FilesMatch "^(schoolHero\.png|school-life\.(webm|mp4))$">
+    Header set X-Robots-Tag "noindex"
+  </FilesMatch>
+</IfModule>
+
 RewriteEngine On
 
 # Redirect only explicit index.html requests, not Apache's DirectoryIndex lookup.

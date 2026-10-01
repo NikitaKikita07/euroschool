@@ -12,3 +12,12 @@
 
 /js/*
   Cache-Control: public, max-age=0, must-revalidate
+
+/images/schoolHero.png
+  X-Robots-Tag: noindex
+
+/school-life.webm
+  X-Robots-Tag: noindex
+
+/school-life.mp4
+  X-Robots-Tag: noindex
