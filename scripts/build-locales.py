@@ -9,10 +9,6 @@ from structured_data import structured_data
 ROOT = Path(__file__).resolve().parent.parent
 ORIGIN = 'https://euroschool.dp.ua'
 PAIRS = json.loads((ROOT / 'scripts/translations.json').read_text(encoding='utf-8'))
-KEYWORDS = {
-    'ru': 'частная школа днепр, частная школа в днепре, частные школы днепра, частные школы в днепре, частная школа выбор, частная школа цены, лучшие частные школы днепра, рейтинг школ днепра, европейская гимназия днепр, украина',
-    'uk': 'приватна школа дніпро, приватна школа у дніпрі, приватні школи дніпро, приватні школи у дніпрі, приватна школа вибір, приватна школа ціни, кращі приватні школи дніпро, рейтинг шкіл дніпро, європейська гімназія дніпро, україна',
-}
 META = {
     'index.html': {
         'uk': ('Приватна школа у Дніпрі | Європейська гімназія', 'Європейська гімназія — приватна школа у Дніпрі, Україна. 1–11 класи, дитячий садок, повний день та творчі студії. Дізнайтеся про навчання, умови вступу та вартість.'),
@@ -105,7 +101,6 @@ class Localize(HTMLParser):
         entry = self.stack.pop()
         if entry[1]: return
         if tag == 'head':
-            self.out.append('\n<meta name="keywords" content="' + KEYWORDS[self.lang] + '">\n')
             self.out.append(f'<link rel="canonical" href="{ORIGIN}{url(self.lang, self.page)}">\n')
             for lang in ('uk', 'ru', 'x-default'):
                 self.out.append(f'<link rel="alternate" hreflang="{lang}" href="{ORIGIN}{url("uk" if lang == "x-default" else lang, self.page)}">\n')

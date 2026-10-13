@@ -4,7 +4,6 @@ from pathlib import Path
 from urllib.parse import urlsplit, unquote
 import xml.etree.ElementTree as ET
 import json
-from structured_data import VisibleFAQ
 
 ROOT = Path(__file__).resolve().parent.parent
 ORIGIN = 'https://euroschool.dp.ua'
@@ -57,9 +56,9 @@ for language in ('uk', 'ru'):
         assert webpage['about']['@id'] == school['@id']
         assert webpage['isPartOf']['@id'] == website['@id']
         assert not any('seo.js' in a.get('src', '') for t, a in page.tags)
-        faq = VisibleFAQ(path.read_text(encoding='utf-8')).items
-        assert webpage.get('mainEntity', []) == faq
-        assert ('FAQPage' in webpage['@type']) == bool(faq)
+        assert webpage['@type'] == 'WebPage'
+        assert 'mainEntity' not in webpage
+        assert 'hasOfferCatalog' not in school
         assert one([a for t, a in page.tags if t == 'html'])['lang'] == language
         assert one([a for t, a in page.tags if a.get('rel') == 'canonical'])['href'] == expected
         for lang in ('uk', 'ru', 'x-default'):
