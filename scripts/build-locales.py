@@ -8,6 +8,15 @@ from structured_data import structured_data
 
 ROOT = Path(__file__).resolve().parent.parent
 ORIGIN = 'https://euroschool.dp.ua'
+GOOGLE_TAG = '''<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18086760127"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18086760127');
+</script>'''
 PAIRS = json.loads((ROOT / 'scripts/translations.json').read_text(encoding='utf-8'))
 META = {
     'index.html': {
@@ -127,7 +136,9 @@ class Localize(HTMLParser):
 def redirect(target):
     # HTTP redirects are handled by .htaccess; keep a manual fallback link.
     return f'''<!doctype html>
-<html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="uk"><head>
+{GOOGLE_TAG}
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Європейська гімназія</title><link rel="canonical" href="{ORIGIN}{target}">
 </head><body><a href="{target}">Перейти на українську версію сайту</a></body></html>
 '''
@@ -138,6 +149,7 @@ for page in META:
         parser.feed((ROOT / 'templates' / (page + '.in')).read_text(encoding='utf-8'))
         (ROOT / lang).mkdir(exist_ok=True)
         html = '\n'.join(line.rstrip() for line in ''.join(parser.out).split('\n'))
+        html = html.replace('<head>', '<head>\n' + GOOGLE_TAG, 1)
         title, description = META[page][lang]
         markup = structured_data(lang, ORIGIN + url(lang, page), title, description, html, ORIGIN)
         html = html.replace('</head>', markup + '</head>', 1)
