@@ -1,4 +1,4 @@
-"""Build deployable /uk/ and /ru/ pages: python scripts/build-locales.py."""
+"""Build deployable Ukrainian root and /ru/ pages: python scripts/build-locales.py."""
 import json
 import re
 from pathlib import Path
@@ -33,7 +33,7 @@ META = {
 }
 
 def url(lang, page):
-    return f'/{lang}/' + ('' if page == 'index.html' else page)
+    return ('/' if lang == 'uk' else '/ru/') + ('' if page == 'index.html' else page)
 
 class Localize(HTMLParser):
     void = set('area base br col embed hr img input link meta param source track wbr'.split())
@@ -75,18 +75,18 @@ class Localize(HTMLParser):
                 del a[key]
         for key in ('src', 'href', 'poster', 'data-lightbox-src'):
             if a.get(key, '').startswith(('images/', 'css/', 'js/', 'school-life.')):
-                a[key] = '../' + a[key]
+                a[key] = ('../' if self.lang == 'ru' else '') + a[key]
             elif key == 'href' and a.get(key, '').startswith('index.html'):
                 a[key] = './' + a[key][len('index.html'):]
         if 'style' in a:
-            a['style'] = a['style'].replace('images/', '../images/')
-        if tag == 'script' and a.get('src', '').startswith('../js/'):
+            a['style'] = a['style'].replace('images/', '../images/' if self.lang == 'ru' else 'images/')
+        if tag == 'script' and a.get('src', '').startswith(('js/', '../js/')):
             a['src'] = a['src'].split('?')[0] + '?v=20260921-1'
         if switch:
             tag = 'a'
             a.pop('type', None)
             other = 'ru' if self.lang == 'uk' else 'uk'
-            a.update(href='..' + url(other, self.page), hreflang=other, lang=other)
+            a.update(href=url(other, self.page), hreflang=other, lang=other)
             a['aria-label'] = 'Перейти на русскую версию' if other == 'ru' else 'Перейти на українську версію'
         if tag == 'meta':
             key = a.get('name', a.get('property', a.get('itemprop')))
@@ -109,7 +109,7 @@ class Localize(HTMLParser):
             self.out.append(f'<link rel="canonical" href="{ORIGIN}{url(self.lang, self.page)}">\n')
             for lang in ('uk', 'ru', 'x-default'):
                 self.out.append(f'<link rel="alternate" hreflang="{lang}" href="{ORIGIN}{url("uk" if lang == "x-default" else lang, self.page)}">\n')
-            self.out.append(f'<meta property="og:url" content="{ORIGIN}{url(self.lang, self.page)}">\n<script src="../js/i18n.js?v=20260921-1"></script>\n')
+            self.out.append(f'<meta property="og:url" content="{ORIGIN}{url(self.lang, self.page)}">\n<script src="/js/i18n.js?v=20260921-1"></script>\n')
         self.out.append('</' + ('a' if entry[3] else tag) + '>')
 
     def handle_startendtag(self, tag, attrs):
@@ -142,18 +142,18 @@ for page in META:
         parser = Localize(lang, page)
         parser.feed((ROOT / 'templates' / (page + '.in')).read_text(encoding='utf-8'))
         (ROOT / lang).mkdir(exist_ok=True)
-        html = ''.join(parser.out)
+        html = '\n'.join(line.rstrip() for line in ''.join(parser.out).split('\n'))
         title, description = META[page][lang]
         markup = structured_data(lang, ORIGIN + url(lang, page), title, description, html, ORIGIN)
         html = html.replace('</head>', markup + '</head>', 1)
-        (ROOT / lang / page).write_text(html, encoding='utf-8')
-    (ROOT / page).write_text(redirect(url('uk', page)), encoding='utf-8')
+        (ROOT / ('' if lang == 'uk' else lang) / page).write_text(html, encoding='utf-8')
+    (ROOT / 'uk' / page).write_text(redirect(url('uk', page)), encoding='utf-8')
 for alias, target in {
-    'eureka': '/uk/evrika.html',
-    'teachers': '/uk/teachers.html',
-    'creativ': '/uk/creativity.html',
-    'galery': '/uk/#children-gallery',
-    'gallery': '/uk/#children-gallery',
+    'eureka': '/evrika.html',
+    'teachers': '/teachers.html',
+    'creativ': '/creativity.html',
+    'galery': '/#children-gallery',
+    'gallery': '/#children-gallery',
 }.items():
     directory = ROOT / alias
     directory.mkdir(exist_ok=True)

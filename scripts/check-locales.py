@@ -37,11 +37,12 @@ def one(items):
 
 urls = set()
 for language in ('uk', 'ru'):
-    for path in sorted((ROOT / language).glob('*.html')):
+    for name in ('index.html', 'teachers.html', 'creativity.html', 'evrika.html'):
+        path = ROOT / ('' if language == 'uk' else language) / name
         page = Page(path)
         other = 'ru' if language == 'uk' else 'uk'
         suffix = '' if path.name == 'index.html' else path.name
-        expected = f'{ORIGIN}/{language}/{suffix}'
+        expected = ORIGIN + ('/' if language == 'uk' else '/ru/') + suffix
         urls.add(expected)
         schema = one(page.schemas)
         assert schema['@context'] == 'https://schema.org'
@@ -63,9 +64,9 @@ for language in ('uk', 'ru'):
         assert one([a for t, a in page.tags if a.get('rel') == 'canonical'])['href'] == expected
         for lang in ('uk', 'ru', 'x-default'):
             alternate = one([a for t, a in page.tags if a.get('rel') == 'alternate' and a.get('hreflang') == lang])
-            assert alternate['href'] == f'{ORIGIN}/{"uk" if lang == "x-default" else lang}/{suffix}'
+            assert alternate['href'] == ORIGIN + ('/ru/' if lang == 'ru' else '/') + suffix
         switch = one([a for t, a in page.tags if a.get('class') == 'lang-switch'])
-        assert switch['href'] == f'../{other}/{suffix}'
+        assert switch['href'] == ('/ru/' if other == 'ru' else '/') + suffix
         for tag, attrs in page.tags:
             assert 'data-' + other not in attrs
             for key in ('href', 'src', 'poster', 'data-lightbox-src'):
@@ -87,3 +88,25 @@ sitemap = ET.parse(ROOT / 'sitemap.xml')
 assert {e.text for e in sitemap.findall('s:url/s:loc', ns)} == urls
 assert len(urls) == 8
 print('PASS sitemap: all eight canonical URLs')
+
+# Migration fallbacks and static-host redirects must lead straight to canonical URLs.
+redirects = {}
+for line in (ROOT / '_redirects').read_text().splitlines():
+    source, target, status = line.split()
+    assert status == '301'
+    assert source != target
+    redirects[source] = target
+assert '/' not in redirects
+for name in ('index.html', 'teachers.html', 'creativity.html', 'evrika.html'):
+    target = '/' + ('' if name == 'index.html' else name)
+    assert redirects['/uk/' + name] == target
+    fallback = Page(ROOT / 'uk' / name)
+    assert one([a for t, a in fallback.tags if a.get('rel') == 'canonical'])['href'] == ORIGIN + target
+assert redirects['/uk/'] == '/'
+assert redirects['/index.html'] == '/'
+for target in redirects.values():
+    assert urlsplit(target).path not in redirects, f'Redirect chain: {target}'
+for entry in sitemap.findall('s:url', ns):
+    for alternate in entry.findall('{http://www.w3.org/1999/xhtml}link'):
+        assert alternate.attrib['href'] in urls
+print('PASS migration redirects and sitemap alternates')

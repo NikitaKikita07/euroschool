@@ -36,7 +36,7 @@ def structured_data(language, page_url, title, description, html, origin):
     uk = language == 'uk'
     name = 'Європейська гімназія' if uk else 'Европейская гимназия'
     city = 'Дніпро' if uk else 'Днепр'
-    home = f'{origin}/{language}/'
+    home = origin + ('/' if language == 'uk' else '/ru/')
     school_id = f'{origin}/#organization'
     website_id = f'{origin}/#website'
     image = f'{origin}/images/search-preview.jpg'
