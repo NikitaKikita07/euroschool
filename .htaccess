@@ -1,4 +1,5 @@
 DirectoryIndex index.html
+ErrorDocument 404 /404.html
 
 # Keep decorative homepage hero media out of search indexes.
 <IfModule mod_headers.c>
